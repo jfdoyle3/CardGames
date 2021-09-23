@@ -13,7 +13,7 @@ public class SingleCard implements Deck {
         Input input=new Input();
         int cardValue= input.inputNumberText("card value: ");
         String cardSuit=input.inputStringText("card suit: ");
-        return new Card(cardValue,cardSuit);
+        return new PlayingCard(cardValue,cardSuit);
     }
 
     public boolean deckEmpty() {

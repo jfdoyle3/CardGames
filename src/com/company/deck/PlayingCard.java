@@ -30,7 +30,7 @@ public class PlayingCard extends Card{
 //        return "Card{ faceUpDown: " + faceDown + ", cardFace: '" + cardFace + " }";
 //    }
 
-    public  void flip() {
+    public void flip() {
         faceDown = !faceDown;
     }
 
