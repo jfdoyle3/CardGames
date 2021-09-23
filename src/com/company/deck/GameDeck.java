@@ -1,6 +1,9 @@
 package com.company.deck;
 
 
+import com.company.card.Card;
+import com.company.card.PlayingCard;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

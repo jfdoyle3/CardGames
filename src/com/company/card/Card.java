@@ -1,4 +1,4 @@
-package com.company.deck;
+package com.company.card;
 
 public abstract class Card {
 

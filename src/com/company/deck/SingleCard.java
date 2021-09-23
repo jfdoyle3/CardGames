@@ -1,6 +1,7 @@
 package com.company.deck;
 
 import com.company.card.Card;
+import com.company.card.PlayingCard;
 import com.company.ui.Input;
 
 public class SingleCard implements Deck {

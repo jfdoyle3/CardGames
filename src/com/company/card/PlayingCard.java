@@ -1,8 +1,8 @@
-package com.company.deck;
+package com.company.card;
 
-public class PlayingCard extends Card{
-    private int value;
-    private String suit;
+public class PlayingCard extends Card {
+    private final int value;
+    private final String suit;
 
     public PlayingCard(int value, String suit) {
         super(true);
@@ -43,23 +43,13 @@ public class PlayingCard extends Card{
     }
 
     public String toString() {
-        String output = "";
-        switch (value) {
-            case 1:
-                output = "A";
-                break;
-            case 11:
-                output = "J";
-                break;
-            case 12:
-                output = "Q";
-                break;
-            case 13:
-                output = "K";
-                break;
-            default:
-                output = value == 10 ? Integer.toString(value) : "" + value;
-        }
+        String output = switch (value) {
+            case 1 -> "A";
+            case 11 -> "J";
+            case 12 -> "Q";
+            case 13 -> "K";
+            default -> value == 10 ? Integer.toString(value) : "" + value;
+        };
         return output + suit;
     }
 }
