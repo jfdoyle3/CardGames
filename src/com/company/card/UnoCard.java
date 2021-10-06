@@ -2,19 +2,37 @@ package com.company.card;
 
 import com.company.deck.UnoColor;
 
-public class UnoNumberCard extends Card {
+public class UnoCard extends Card {
 
         private final int value;
         private final UnoColor color;
 
-    public UnoNumberCard(int value, UnoColor color) {
-        super(true);
+    public UnoCard(int value, UnoColor color) {
+        super(value, color);
         this.value = value;
         this.color = color;
     }
 
+//    public UnoCard(int value, UnoColor color) {
+//        super(true);
+//        this.value = value;
+//        this.color = color;
+//    }
 
+    public int getValue() {
+        return value;
+    }
 
+    public UnoColor getColor() {
+        return color;
+    }
+
+    @Override
+    public String display() {
+        StringBuilder cardOutput=new StringBuilder();
+        cardOutput.append(color).append(value).append(UnoColor.RESET);
+        return  cardOutput.toString();
+    }
 
     @Override
     public void flip() {

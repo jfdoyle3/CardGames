@@ -1,7 +1,7 @@
 package com.company.deck;
 
 import com.company.card.Card;
-import com.company.card.UnoNumberCard;
+import com.company.card.UnoCard;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,50 +35,50 @@ public class UnoDeckColorTest {
 
         for (UnoColor color : COLORS) {
             for (int value : VALUES) {
-                cards.add(new UnoNumberCard(value, color));
-                cards.add(new UnoNumberCard(value, color));
+                cards.add(new UnoCard(value, color));
+                cards.add(new UnoCard(value, color));
             }
-            cards.add(new UnoNumberCard(0, color));
+            cards.add(new UnoCard(0, color));
         }
          System.out.println(cards.toString());
         for (UnoColor color : COLORS_BOLD) {
             for (int value : VALUES) {
-                cardsBold.add(new UnoNumberCard(value, color));
-                cardsBold.add(new UnoNumberCard(value, color));
+                cardsBold.add(new UnoCard(value, color));
+                cardsBold.add(new UnoCard(value, color));
             }
-            cardsBold.add(new UnoNumberCard(0, color));
+            cardsBold.add(new UnoCard(0, color));
         }
         System.out.println(cardsBold.toString());
         for (UnoColor color : COLORS_BRIGHT) {
             for (int value : VALUES) {
-                cardsBright.add(new UnoNumberCard(value, color));
-                cardsBright.add(new UnoNumberCard(value, color));
+                cardsBright.add(new UnoCard(value, color));
+                cardsBright.add(new UnoCard(value, color));
             }
-            cardsBright.add(new UnoNumberCard(0, color));
+            cardsBright.add(new UnoCard(0, color));
         }
         System.out.println(cardsBright.toString());
         for (UnoColor color : COLORS_BOLD_BRIGHT) {
             for (int value : VALUES) {
-                cardsBoldBright.add(new UnoNumberCard(value, color));
-                cardsBoldBright.add(new UnoNumberCard(value, color));
+                cardsBoldBright.add(new UnoCard(value, color));
+                cardsBoldBright.add(new UnoCard(value, color));
             }
-            cardsBoldBright.add(new UnoNumberCard(0, color));
+            cardsBoldBright.add(new UnoCard(0, color));
         }
         System.out.println(cardsBoldBright.toString());
         for (UnoColor color : COLORS_BACKGROUND) {
             for (int value : VALUES) {
-                cardsBackground.add(new UnoNumberCard(value, color));
-                cardsBackground.add(new UnoNumberCard(value, color));
+                cardsBackground.add(new UnoCard(value, color));
+                cardsBackground.add(new UnoCard(value, color));
             }
-            cardsBackground.add(new UnoNumberCard(0, color));
+            cardsBackground.add(new UnoCard(0, color));
         }
         System.out.println(cardsBackground.toString());
         for (UnoColor color : COLORS_BACKGROUND_BRIGHT) {
             for (int value : VALUES) {
-                cardsBackgroundBright.add(new UnoNumberCard(value, color));
-                cardsBackgroundBright.add(new UnoNumberCard(value, color));
+                cardsBackgroundBright.add(new UnoCard(value, color));
+                cardsBackgroundBright.add(new UnoCard(value, color));
             }
-            cardsBackgroundBright.add(new UnoNumberCard(0, color));
+            cardsBackgroundBright.add(new UnoCard(0, color));
         }
         System.out.println(cardsBackgroundBright.toString());
     }

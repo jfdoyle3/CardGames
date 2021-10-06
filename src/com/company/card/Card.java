@@ -1,13 +1,27 @@
 package com.company.card;
 
+import com.company.deck.UnoColor;
+
 public abstract class Card {
 
-    protected boolean faceDown;
+    protected int rank;
+    protected UnoColor suit;
+    protected boolean isFaceDown = true;
 
-    public Card(boolean faceDown) {
-        this.faceDown = faceDown;
+    public Card(int rank, UnoColor suit) {
+        this.rank = rank;
+        this.suit = suit;
     }
 
-    public abstract void flip();
 
+
+
+    public int getRank() {return rank;}
+    public UnoColor getSuit() {return suit;}
+    public boolean getIsFaceDown() {return isFaceDown;}
+    public abstract String display();
+
+    public void flip() {
+        isFaceDown = !isFaceDown;
+    }
 }

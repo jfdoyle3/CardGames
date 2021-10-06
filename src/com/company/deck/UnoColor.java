@@ -2,6 +2,12 @@ package com.company.deck;
 
 public enum UnoColor {
 
+    // SUITS
+    HEARTS("♥"),
+    SPADES( "♠"),
+    CLUBS("♧"),
+    DIAMONDS ("♦"),
+
     //Color end string, color reset
     RESET("\033[0m"),
 
@@ -80,6 +86,7 @@ public enum UnoColor {
     UnoColor(String code) {
         this.code = code;
     }
+
 
     @Override
     public String toString() {

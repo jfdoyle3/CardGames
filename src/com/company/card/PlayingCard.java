@@ -1,19 +1,23 @@
 package com.company.card;
 
-public class PlayingCard extends Card {
-    private final int value;
-    private final String color;
+import com.company.deck.UnoColor;
 
-    public PlayingCard(int value, String color) {
-        super(true);
-        this.value = value;
-        this.color = color;
+public class PlayingCard extends Card {
+    private final int rank;
+    private final UnoColor suit;
+
+    public PlayingCard(int rank, UnoColor suit) {
+        super(rank,suit);
+
+        this.rank= rank;
+        this.suit = suit;
     }
 
-    public PlayingCard(boolean faceDown, int value, String suit) {
-        super(faceDown);
-        this.value = value;
-        this.color = suit;
+    public PlayingCard(boolean isFaceDown, int rank, UnoColor suit) {
+        super(rank,suit);
+
+        this.rank = rank;
+        this.suit = suit;
     }
 
 
@@ -30,24 +34,29 @@ public class PlayingCard extends Card {
 //        return "Card{ faceUpDown: " + faceDown + ", cardFace: '" + cardFace + " }";
 //    }
 
+    @Override
+    public String display() {
+        return null;
+    }
+
     public void flip() {
-        faceDown = !faceDown;
+        isFaceDown = !isFaceDown;
     }
 
     public int getValue() {
-        return this.value;
+        return this.rank;
     }
 
     public boolean isFaceDown() {
-        return faceDown;
+        return isFaceDown;
     }
 
     @Override
     public String toString() {
         return "PlayingCard{" +
-                "faceDown=" + faceDown +
-                ", value=" + value +
-                ", color='" + color + '\'' +
+                "faceDown=" + isFaceDown +
+                ", value=" + rank +
+                ", color='" + suit + '\'' +
                 '}';
     }
 
