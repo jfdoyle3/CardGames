@@ -2,18 +2,18 @@ package com.company.card;
 
 public class PlayingCard extends Card {
     private final int value;
-    private final String suit;
+    private final String color;
 
-    public PlayingCard(int value, String suit) {
+    public PlayingCard(int value, String color) {
         super(true);
         this.value = value;
-        this.suit = suit;
+        this.color = color;
     }
 
     public PlayingCard(boolean faceDown, int value, String suit) {
         super(faceDown);
         this.value = value;
-        this.suit = suit;
+        this.color = suit;
     }
 
 
@@ -42,14 +42,23 @@ public class PlayingCard extends Card {
         return faceDown;
     }
 
+    @Override
     public String toString() {
-        String output = switch (value) {
-            case 1 -> "A";
-            case 11 -> "J";
-            case 12 -> "Q";
-            case 13 -> "K";
-            default -> value == 10 ? Integer.toString(value) : "" + value;
-        };
-        return output + suit;
+        return "PlayingCard{" +
+                "faceDown=" + faceDown +
+                ", value=" + value +
+                ", color='" + color + '\'' +
+                '}';
     }
+
+    //    public String toString() {
+//        String output = switch (value) {
+//            case 1 -> "A";
+//            case 11 -> "J";
+//            case 12 -> "Q";
+//            case 13 -> "K";
+//            default -> value == 10 ? Integer.toString(value) : "" + value;
+//        };
+//        return output + color;
+//    }
 }
