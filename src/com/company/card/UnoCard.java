@@ -19,6 +19,8 @@ public class UnoCard extends Card {
 //        this.color = color;
 //    }
 
+    // Abstract method for getters on Value/Rank , Color/Suit????
+
     public int getValue() {
         return value;
     }
