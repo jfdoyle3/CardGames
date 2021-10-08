@@ -1,2 +1,2 @@
-# Poker
-Poker game in Java
+# Card Games
+Card games in Java

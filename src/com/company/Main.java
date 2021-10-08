@@ -1,21 +1,39 @@
 package com.company;
 
+import com.company.card.Card;
+import com.company.card.UnoCard;
 import com.company.deck.UnoColor;
 import com.company.deck.UnoDeck;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
 
     public static void main(String[] args) {
 
+
+        List<Card> hand=new ArrayList<>();
         UnoDeck deck = new UnoDeck();
         System.out.println(deck);
-        String line = "-|-";
-        System.out.println(line.repeat(6));
-        System.out.println(UnoColor.HEARTS+" "+UnoColor.SPADES+" "+UnoColor.CLUBS+" "+UnoColor.DIAMONDS);
-        System.out.println(UnoColor.WILD);
-        System.out.println(deck.getCard(20));
-        System.out.println(line.repeat(6));
+        deck.shuffle();
+        for(int idx=0; idx<7; idx++)
+            hand.add(deck.unoDraw());
+
+
+        System.out.println(hand);
+
+
+
+
+
+//        String line = "-|-";
+//        System.out.println(line.repeat(6));
+//        System.out.println(UnoColor.HEARTS+" "+UnoColor.SPADES+" "+UnoColor.CLUBS+" "+UnoColor.DIAMONDS);
+//        System.out.println(UnoColor.WILD);
+//        System.out.println(deck.getCard(20));
+//        System.out.println(line.repeat(6));
 
         // Validation of Cards
         // Comparing cards Value and Color
