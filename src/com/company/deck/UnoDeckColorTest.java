@@ -1,7 +1,8 @@
 package com.company.deck;
 
-import com.company.card.Card;
+import com.company.card.AltCard;
 import com.company.card.UnoCard;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,16 +18,16 @@ public class UnoDeckColorTest {
     private final static int[] VALUES = { 1, 2, 3, 4, 5, 6, 7, 8, 9}; // 4 colors of each 2 per color,   Zero Card: 4 colors 1 per color = 76 cards
     private final static int[] ACTIONS={13,14,15}; // 13 = Draw 2, 14 = Reverse, 15 = Skip - 4 of each 2 per color = 24 cards
     private final static int WILD=98; // 4 Wild Cards  / ( 4  4+ Wild ) not used- extra challenge = 8 cards
-    private List<Card> cards;
-    private List<Card> cardsBold;
-    private List<Card> cardsBright;
-    private List<Card> cardsBoldBright;
-    private List<Card> cardsBackground;
-    private List<Card> cardsBackgroundBright;
+    private List<AltCard> altCards;
+    private List<AltCard> cardsBold;
+    private List<AltCard> cardsBright;
+    private List<AltCard> cardsBoldBright;
+    private List<AltCard> cardsBackground;
+    private List<AltCard> cardsBackgroundBright;
     private boolean isEmpty=false;
 
     public UnoDeckColorTest() {
-        cards = new ArrayList<>();
+        altCards = new ArrayList<>();
         cardsBold=new ArrayList<>();
         cardsBright=new ArrayList<>();
         cardsBoldBright = new ArrayList<>();
@@ -35,12 +36,12 @@ public class UnoDeckColorTest {
 
         for (UnoColor color : COLORS) {
             for (int value : VALUES) {
-                cards.add(new UnoCard(value, color));
-                cards.add(new UnoCard(value, color));
+                altCards.add(new UnoCard(value, color));
+                altCards.add(new UnoCard(value, color));
             }
-            cards.add(new UnoCard(0, color));
+            altCards.add(new UnoCard(0, color));
         }
-         System.out.println(cards.toString());
+         System.out.println(altCards.toString());
         for (UnoColor color : COLORS_BOLD) {
             for (int value : VALUES) {
                 cardsBold.add(new UnoCard(value, color));
@@ -86,6 +87,6 @@ public class UnoDeckColorTest {
     @Override
     public String toString() {
         return "UnoDeck: " +
-                cards.toString();
+                altCards.toString();
     }
 }

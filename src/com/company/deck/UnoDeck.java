@@ -1,7 +1,8 @@
 package com.company.deck;
 
-import com.company.card.Card;
+import com.company.card.AltCard;
 import com.company.card.UnoCard;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -57,7 +58,7 @@ public class UnoDeck implements Deck{
     public void shuffle() {Collections.shuffle(cards);}
 
     @Override
-    public Card draw(boolean facing) {
+    public AltCard draw(boolean facing) {
         return null;
     }
 

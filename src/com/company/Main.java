@@ -1,8 +1,6 @@
 package com.company;
 
-import com.company.card.Card;
-import com.company.card.UnoCard;
-import com.company.deck.UnoColor;
+import com.company.card.AltCard;
 import com.company.deck.UnoDeck;
 
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        List<Card> hand=new ArrayList<>();
+        List<AltCard> hand=new ArrayList<>();
         UnoDeck deck = new UnoDeck();
         System.out.println(deck);
         deck.shuffle();

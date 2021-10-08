@@ -2,7 +2,7 @@ package com.company.card;
 
 import com.company.deck.UnoColor;
 
-public class PlayingCard extends Card {
+public class PlayingCard extends AltCard {
     private final int rank;
     private final UnoColor suit;
 
