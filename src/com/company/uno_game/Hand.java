@@ -32,30 +32,7 @@ public class Hand {
         return output.toString().trim();
     }
 
-    public int getValue() {
-        int score = 0;
-        boolean haveAce11 = false;
-        for (Card card : cards) {
-            int value = card.getRank();
-            switch (value) {
-                case 1 -> {
-                    value = score + 11 > 21 ? 1 : 11;
-                    if (value == 11) {
-                        haveAce11 = true;
-                    }
-                    score += value;
-                }
-                case 11, 12, 13 -> score += 10;
-                default -> score += value;
-            }
-            if(score > 21 && haveAce11) {
-                score -= 10;
-                haveAce11 = false;
-            }
-        }
 
-        return score;
-    }
 
     // getting composition methods
     // getter with no setter
