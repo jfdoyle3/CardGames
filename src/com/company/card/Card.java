@@ -25,5 +25,11 @@ public abstract class Card {
     public String toString() {
         return "Card{ faceUpDown: " + faceUpDown + ", cardFace: '" + cardFace + " }";
     }
+
+    public abstract char[] display();
+
+    public abstract int getRank();
+
+    public abstract boolean getIsFaceDown();
 }
 
