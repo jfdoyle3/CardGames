@@ -27,9 +27,9 @@ public class Input {
         int option = min - 1;
         do {
             System.out.println(prompt);
-            String input = scanner.nextLine();
+            String input1 = input.nextLine();
             try{
-                option = Integer.parseInt(input);
+                option = Integer.parseInt(input1);
             } catch (NumberFormatException err) {
                 System.out.println(errorMsg);
             }

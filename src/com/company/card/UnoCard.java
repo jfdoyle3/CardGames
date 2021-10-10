@@ -5,9 +5,9 @@ import com.company.deck.UnoColor;
 public class UnoCard extends AltCard {
 
         private final int value;
-        private final UnoColor color;
+        private final String color;
 
-    public UnoCard(int value, UnoColor color) {
+    public UnoCard(int value, String color) {
         super(value, color);
         this.value = value;
         this.color = color;
@@ -25,7 +25,7 @@ public class UnoCard extends AltCard {
         return value;
     }
 
-    public UnoColor getColor() {
+    public String getColor() {
         return color;
     }
 

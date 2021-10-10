@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.card.AltCard;
+import com.company.deck.UnoColor;
 import com.company.deck.UnoDeck;
 
 import java.util.ArrayList;
@@ -26,12 +27,12 @@ public class Main {
 
 
 
-//        String line = "-|-";
-//        System.out.println(line.repeat(6));
-//        System.out.println(UnoColor.HEARTS+" "+UnoColor.SPADES+" "+UnoColor.CLUBS+" "+UnoColor.DIAMONDS);
-//        System.out.println(UnoColor.WILD);
-//        System.out.println(deck.getCard(20));
-//        System.out.println(line.repeat(6));
+        String line = "\n";
+        System.out.println(line.repeat(12));
+        System.out.println(UnoColor.HEARTS+" "+UnoColor.SPADES+" "+UnoColor.CLUBS+" "+UnoColor.DIAMONDS);
+        System.out.println(UnoColor.WILD);
+        System.out.println(deck.getCard(20));
+        System.out.println(line.repeat(6));
 
         // Validation of Cards
         // Comparing cards Value and Color

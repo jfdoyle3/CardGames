@@ -19,7 +19,7 @@ public class PlayingCardDeck implements Deck {
         altCards = new ArrayList<>();
         for (var suit : SUITS) {
             for (var value : VALUES) {
-                altCards.add(new PlayingCard(value, suit));
+                altCards.add(new PlayingCard(value, suit.toString()));
             }
         }
     }

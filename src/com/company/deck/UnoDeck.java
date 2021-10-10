@@ -1,6 +1,7 @@
 package com.company.deck;
 
 import com.company.card.AltCard;
+import com.company.card.Card;
 import com.company.card.UnoCard;
 
 import java.util.ArrayList;
@@ -13,17 +14,17 @@ public class UnoDeck implements Deck{
     private final static int[] VALUES = { 1, 2, 3, 4, 5, 6, 7, 8, 9}; // 4 colors of each 2 per color,   Zero Card: 4 colors 1 per color = 76 cards
     private final static int[] ACTIONS={13,14,15}; // 13 = Draw 2, 14 = Reverse, 15 = Skip - 4 of each 2 per color = 24 cards
     private final static int WILD=16; // 4 Wild Cards  / ( 4  4+ Wild ) not used- extra challenge = 8 cards
-    private List<UnoCard> cards;
+    private List<AltCard> cards;
     private boolean isEmpty=false;
 
     public UnoDeck() {
         cards = new ArrayList<>();
         for (UnoColor color : COLORS) {
             for (int value : VALUES) {
-                cards.add(new UnoCard(value, color));
-                cards.add(new UnoCard(value, color));
+                cards.add(new UnoCard(value, color.toString()));
+                cards.add(new UnoCard(value, color.toString()));
             }
-            cards.add(new UnoCard(0, color));
+            cards.add(new UnoCard(0, color.toString()));
         }
     }
 //        for (int idx=0; idx<12; idx++) {
@@ -33,16 +34,17 @@ public class UnoDeck implements Deck{
 //            }
 //        }
 
-    public UnoCard getCard(int index) {
+    public AltCard getCard(int index) {
         return cards.get(index);
     }
 
     public int getValue(int index){
-        return getCard(index).getValue();
+        return getCard(index).getRank();
     }
 
-    public UnoColor getColor(int index){
-        return getCard(index).getColor();
+    public String getColor(int index){
+      //  return getCard(index).getSuit();
+        return "s";
     }
 
     @Override
@@ -50,7 +52,7 @@ public class UnoDeck implements Deck{
         return "UnoDeck: " +
                 cards.toString();
     }
-    public UnoCard unoDraw(){
+    public AltCard unoDraw(){
         return cards.remove(cards.size() - 1);
     }
 

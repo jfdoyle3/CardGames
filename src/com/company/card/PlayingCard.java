@@ -4,16 +4,16 @@ import com.company.deck.UnoColor;
 
 public class PlayingCard extends AltCard {
     private final int rank;
-    private final UnoColor suit;
+    private final String suit;
 
-    public PlayingCard(int rank, UnoColor suit) {
+    public PlayingCard(int rank, String suit) {
         super(rank,suit);
 
         this.rank= rank;
         this.suit = suit;
     }
 
-    public PlayingCard(boolean isFaceDown, int rank, UnoColor suit) {
+    public PlayingCard(boolean isFaceDown, int rank, String suit) {
         super(rank,suit);
 
         this.rank = rank;
