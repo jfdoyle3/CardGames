@@ -1,25 +1,25 @@
 https://en.wikipedia.org/wiki/Mau-Mau_(card_game)
 
 Rules
-The game is typically played with a 32-altCard pack, either a French-suited pack from which the
-Twos, Threes, Fours, Fives and Sixes have been removed or, especially in Europe, with a 32-altCard German pack.
+The game is typically played with a 32-card pack, either a French-suited pack from which the
+Twos, Threes, Fours, Fives and Sixes have been removed or, especially in Europe, with a 32-card German pack.
 For more than 5 players, 2 packs of cards may be used.
 
 The aim is to be first to get rid of all of one's cards. Most of the time, the winner will have to say something
 at this point, usually "Mau". If they fail to say this, they do not win and instead must take penalty cards.
-If a player's last altCard is a Jack, they must reply differently, usually saying "Mau Mau".
+If a player's last card is a Jack, they must reply differently, usually saying "Mau Mau".
 
 Before the start of the game, a player who is not the dealer cuts the deck 4 times. If they cut 1-3 significant cards,
 they are allowed to keep them if they want. However, if four cards where the cards are cut are found to be power cards,
 the deck needs to be reshuffled and the cut is repeated.[1] The players are each dealt a hand of cards (usually 5 or 6).
-The rest are placed face down as the stock or stack. At the beginning of the game the topmost altCard is revealed and
+The rest are placed face down as the stock or stack. At the beginning of the game the topmost card is revealed and
 placed face up on the table then the players take it in turns to play their cards.
 
-A altCard can only be played if it corresponds to the suit or value of the face-up altCard.
+A card can only be played if it corresponds to the suit or value of the face-up card.
 E.g. if it is the 10 of spades, only another spade or another 10 can be played (but see below for Jacks).
-If a player is not able to do this, they draw one altCard from the stack; If they can play this altCard,
-they may do so; otherwise, they keep the drawn altCard and passes on their turn. When the drawing stack is empty,
-the playing stack (except for the topmost altCard) is shuffled and turned over to serve as a new drawing stack.
+If a player is not able to do this, they draw one card from the stack; If they can play this card,
+they may do so; otherwise, they keep the drawn card and passes on their turn. When the drawing stack is empty,
+the playing stack (except for the topmost card) is shuffled and turned over to serve as a new drawing stack.
 
 The 7, 8, Jack, and Ace of all suits are significant cards:
 
@@ -28,10 +28,10 @@ the 7 to play another 7, in which case the player to their left must take 4 card
 7, then 6, then 8.)
 Any 8 forces the next player to miss their turn. (A variant of the game allows the player facing the 8 to play another
 8, in which case the next player after them must play another 8 or miss a turn, etc.)
-A Jack of any suit is the equivalent of a Joker and can be played on any altCard. The player who plays
-it then chooses a altCard suit. The next player then plays as if the Jack was of the chosen suit.
-If an Ace is played, one other altCard must be played with it. If the player does not have another altCard, or cannot follow
-in suit or number, then the player must take a altCard from the pack. If a player's final altCard is an Ace, they cannot win
-on that turn. When a player has only one altCard left, they must say “Mau” (even if it is an Ace); if that altCard is a Jack,
-they must say “Mau-Mau”. Failure means that the player must take a altCard.
-If the game is scored, and the winning altCard is a Jack, then all points against the losers are doubled.
+A Jack of any suit is the equivalent of a Joker and can be played on any card. The player who plays
+it then chooses a card suit. The next player then plays as if the Jack was of the chosen suit.
+If an Ace is played, one other card must be played with it. If the player does not have another card, or cannot follow
+in suit or number, then the player must take a card from the pack. If a player's final card is an Ace, they cannot win
+on that turn. When a player has only one card left, they must say “Mau” (even if it is an Ace); if that card is a Jack,
+they must say “Mau-Mau”. Failure means that the player must take a card.
+If the game is scored, and the winning card is a Jack, then all points against the losers are doubled.

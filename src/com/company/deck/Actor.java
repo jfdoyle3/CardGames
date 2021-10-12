@@ -1,5 +1,7 @@
 package com.company.deck;
 
+import com.company.uno_game.Hand;
+
 public interface Actor {
     byte getAction(Hand hand, int dealer);
 

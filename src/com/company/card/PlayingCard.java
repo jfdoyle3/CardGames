@@ -1,8 +1,6 @@
 package com.company.card;
 
-import com.company.deck.UnoColor;
-
-public class PlayingCard extends AltCard {
+public class PlayingCard extends Card {
     private final int rank;
     private final String suit;
 

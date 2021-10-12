@@ -2,7 +2,7 @@ package com.company.card;
 
 import com.company.deck.UnoColor;
 
-public class UnoCard extends AltCard {
+public class UnoCard extends Card {
 
         private final int value;
         private final String color;
@@ -49,15 +49,5 @@ public class UnoCard extends AltCard {
                // color+UnoColor.RESET;
     }
 
-    //    public String toString() {
-//        String output = switch (value) {
-//            case 1 -> "A";
-//            case 11 -> "J";
-//            case 12 -> "Q";
-//            case 13 -> "K";
-//            default -> value == 10 ? Integer.toString(value) : "" + value;
-//        };
-//        return output + color;
-//
 }
 

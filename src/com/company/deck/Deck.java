@@ -1,11 +1,11 @@
 package com.company.deck;
 
-import com.company.card.AltCard;
+import com.company.card.Card;
 
 public interface Deck {
     void shuffle();
+ Card unoDraw();
+    Card draw(boolean facing);
 
-    AltCard draw(boolean facing);
-
-    boolean deckEmpty();
+    boolean isDeckEmpty();
 }
