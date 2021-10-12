@@ -30,13 +30,8 @@ public class PlayingCardDeck implements Deck {
     }
 
     @Override
-<<<<<<< HEAD
-    public Card draw() {
-        return cards.remove(cards.size() - 1);
-=======
     public Card unoDraw() {
         return null;
-
     }
 
 
@@ -47,21 +42,12 @@ public class PlayingCardDeck implements Deck {
     }
 
     @Override
-<<<<<<< HEAD
-    public Card flipDraw() {
-        return null;
-    }
-
-
-    public boolean isDeckEmpty() {
-=======
     public boolean isDeckEmpty() {
         return false;
     }
 
 
     public boolean deckEmpty() {
->>>>>>> development
         return cards.size() == 0;
     }
 

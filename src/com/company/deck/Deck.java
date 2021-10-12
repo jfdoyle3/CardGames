@@ -7,10 +7,5 @@ public interface Deck {
  Card unoDraw();
     Card draw(boolean facing);
 
-    Card draw();
-
-    Card flipDraw();
-
     boolean isDeckEmpty();
-
 }

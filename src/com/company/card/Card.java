@@ -32,11 +32,9 @@ public abstract class Card {
     }
 
 
-
-//    public String getCardFace() {
-////        if (this.isFaceDown)
-////            return this.cardFace;
-//        return "[#]";
-//    }
-
+    public String getCardFace() {
+//        if (this.isFaceDown)
+//            return this.cardFace;
+        return "[#]";
+    }
 }

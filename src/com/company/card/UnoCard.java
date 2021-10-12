@@ -12,13 +12,8 @@ public class UnoCard extends Card {
 
 
 
-//    public UnoCard(int value, UnoColor color) {
-//        super(true);
-//        this.value = value;
-//        this.color = color;
-//    }
 
-
+    // Abstract method for getters on Value/Rank , Color/Suit????
 
     public int getRank() {
         return rank;
@@ -37,17 +32,13 @@ public class UnoCard extends Card {
 
     @Override
     public void flip() {
-        isFaceDown = !isFaceDown;
+
     }
 
 //    @Override
 //    public String toString() {
 //        StringBuilder cardOutput=new StringBuilder();
-
-//        cardOutput.append(color).append(value).append(UnoColor.RESET);
-
 //        cardOutput.append(suit).append(rank).append(UnoColor.RESET);
-
 //        return  cardOutput.toString();
 //               // color+UnoColor.RESET;
 //    }

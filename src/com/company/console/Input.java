@@ -26,10 +26,7 @@ public class Input {
     }
 
     public static int getInt(String prompt, int min, int max, String errorMsg) {
-
-      //  int option = min - 1;
         int option = min;
-
         do {
             System.out.println(prompt);
             String input1 = input.nextLine();

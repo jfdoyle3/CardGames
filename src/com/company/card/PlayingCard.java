@@ -13,6 +13,7 @@ public class PlayingCard extends Card {
 
     public PlayingCard(boolean isFaceDown, int rank, String suit) {
         super(rank,suit);
+
         this.rank = rank;
         this.suit = suit;
     }
