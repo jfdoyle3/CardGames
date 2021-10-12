@@ -11,11 +11,7 @@ public class UnoCard extends Card {
     }
 
 
-//    public UnoCard(int value, UnoColor color) {
-//        super(true);
-//        this.value = value;
-//        this.color = color;
-//    }
+
 
     // Abstract method for getters on Value/Rank , Color/Suit????
 
