@@ -11,10 +11,17 @@ public class UnoDeck implements Deck{
 
     private final static UnoColor[] COLORS = {UnoColor.RED_BOLD_BRIGHT,UnoColor.GREEN_BOLD_BRIGHT,UnoColor.BLUE_BOLD_BRIGHT,UnoColor.YELLOW_BOLD_BRIGHT};
     private final static int[] VALUES = { 1, 2, 3, 4, 5, 6, 7, 8, 9}; // 4 colors of each 2 per color,   Zero Card: 4 colors 1 per color = 76 cards
+<<<<<<< HEAD
     private final static int[] ACTIONS={13,14,15}; // 13 = Draw 2, 14 = Reverse, 15 = Skip - 4 of each 2 per color = 24 cards
     private final static int WILD=16; // 4 Wild Cards  / ( 4  4+ Wild ) not used- extra challenge = 8 cards
     private List<Card> cards;
     private boolean isEmpty=false;
+=======
+    private final static int[] ACTIONS={10,11,12}; // 10 = Draw 2, 11 = Reverse, 12 = Skip - 4 of each 2 per color = 24 cards
+    private final static int WILD=13; // 4 Wild Cards  / ( 4  4+ Wild ) not used- extra challenge = 8 cards
+    private List<Card> cards;
+
+>>>>>>> development
 
     public UnoDeck() {
         cards = new ArrayList<>();
@@ -42,8 +49,7 @@ public class UnoDeck implements Deck{
     }
 
     public String getColor(int index){
-      //  return getCard(index).getSuit();
-        return "s";
+       return getCard(index).getSuit();
     }
 
     @Override
@@ -51,8 +57,12 @@ public class UnoDeck implements Deck{
         return "UnoDeck: " +
                 cards.toString();
     }
+<<<<<<< HEAD
 
     public Card draw(){
+=======
+    public Card unoDraw(){
+>>>>>>> development
         return cards.remove(cards.size() - 1);
     }
 
@@ -66,15 +76,26 @@ public class UnoDeck implements Deck{
 
 
     @Override
+<<<<<<< HEAD
     public Card flipDraw() {
         Card card = draw();
         card.flip();
         return card;
+=======
+    public Card draw(boolean facing) {
+        return null;
+>>>>>>> development
     }
 
     @Override
     public boolean isDeckEmpty() {
+<<<<<<< HEAD
         return cards.size()==0 ? true : false;
+=======
+        if(cards.size()==0)
+            return true;
+        return false;
+>>>>>>> development
     }
 
 }

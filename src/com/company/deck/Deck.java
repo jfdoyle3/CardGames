@@ -4,7 +4,10 @@ import com.company.card.Card;
 
 public interface Deck {
     void shuffle();
+ Card unoDraw();
+    Card draw(boolean facing);
 
+<<<<<<< HEAD
     Card draw();
 
     Card flipDraw();
@@ -12,4 +15,7 @@ public interface Deck {
     boolean isDeckEmpty();
 
 
+=======
+    boolean isDeckEmpty();
+>>>>>>> development
 }

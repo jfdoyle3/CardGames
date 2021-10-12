@@ -1,5 +1,8 @@
 package com.company.uno_game;
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
 
 import com.company.card.Card;
 import com.company.card.UnoCard;
@@ -10,6 +13,7 @@ import java.util.List;
 public class Hand {
     private List<Card> cards = new ArrayList<>();
     private int bet = 0;
+<<<<<<< HEAD
 
     private String holder;
     
@@ -17,6 +21,9 @@ public class Hand {
     public Hand(String holder) {
         this.holder = holder;
     }
+=======
+    //private Player player;
+>>>>>>> development
 
     public void addCard(Card card) {
         cards.add(card);
@@ -28,12 +35,47 @@ public class Hand {
             output.append(card.display()).append(" ");
         }
 
+<<<<<<< HEAD
         return output.toString().trim();
     }
 
 
 
 
+=======
+        return output.toString();
+    }
+
+    public String displayValue() {
+        int score = 0;
+        boolean haveAce11 = false;
+        for (Card card : cards) {
+            int value = card.getRank();
+            switch (value) {
+                case 1 -> {
+                    value = score + 11 > 21 ? 1 : 11;
+                    if (value == 11) {
+                        haveAce11 = true;
+                    }
+                    score += value;
+                }
+                case 11, 12, 13 -> score += 10;
+                default -> score += value;
+            }
+            if(score > 21 && haveAce11) {
+                score -= 10;
+                haveAce11 = false;
+            }
+        }
+
+        return Integer.toString(score);
+    }
+
+    public Card getCard(int index) {
+        return cards.get(index);
+    }
+
+>>>>>>> development
 
     // removeCard method
     public Card removeCard(int index) {
@@ -41,6 +83,10 @@ public class Hand {
         return cards.remove(index);
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> development
 
     public void revealHand() {
         for (Card card : cards) {
@@ -56,6 +102,10 @@ public class Hand {
 
     public int getShownRank() {
         return cards.get(1).getRank();
+    }
+
+    public int getHandSize(){
+        return cards.size();
     }
 
 }

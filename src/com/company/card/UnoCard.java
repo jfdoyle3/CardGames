@@ -4,29 +4,35 @@ import com.company.deck.UnoColor;
 
 public class UnoCard extends Card {
 
-        private final int value;
-        private final String color;
 
-    public UnoCard(int value, String color) {
-        super(value, color);
-        this.value = value;
-        this.color = color;
+
+    public UnoCard(int rank, String suit) {
+        super(rank, suit);
     }
 
+<<<<<<< HEAD
+=======
+
+//    public UnoCard(int value, UnoColor color) {
+//        super(true);
+//        this.value = value;
+//        this.color = color;
+//    }
+>>>>>>> development
 
 
-    public int getValue() {
-        return value;
+    public int getRank() {
+        return rank;
     }
 
-    public String getColor() {
-        return color;
+    public String getSuit() {
+        return suit;
     }
 
     @Override
     public String display() {
         StringBuilder cardOutput=new StringBuilder();
-        cardOutput.append(color).append(value).append(UnoColor.RESET);
+        cardOutput.append(suit).append(rank).append(UnoColor.RESET);
         return  cardOutput.toString();
     }
 
@@ -38,20 +44,14 @@ public class UnoCard extends Card {
 //    @Override
 //    public String toString() {
 //        StringBuilder cardOutput=new StringBuilder();
+<<<<<<< HEAD
 //        cardOutput.append(color).append(value).append(UnoColor.RESET);
+=======
+//        cardOutput.append(suit).append(rank).append(UnoColor.RESET);
+>>>>>>> development
 //        return  cardOutput.toString();
 //               // color+UnoColor.RESET;
 //    }
 
-    //    public String toString() {
-//        String output = switch (value) {
-//            case 1 -> "A";
-//            case 11 -> "J";
-//            case 12 -> "Q";
-//            case 13 -> "K";
-//            default -> value == 10 ? Integer.toString(value) : "" + value;
-//        };
-//        return output + color;
-//
 }
 
