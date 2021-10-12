@@ -7,15 +7,10 @@ public interface Deck {
  Card unoDraw();
     Card draw(boolean facing);
 
-<<<<<<< HEAD
     Card draw();
 
     Card flipDraw();
 
     boolean isDeckEmpty();
 
-
-=======
-    boolean isDeckEmpty();
->>>>>>> development
 }

@@ -26,7 +26,6 @@ public abstract class Card {
     }
 
     public abstract String display();
-<<<<<<< HEAD
 
     public void flip() {
         isFaceDown = !isFaceDown;
@@ -34,17 +33,10 @@ public abstract class Card {
 
 
 
-=======
+//    public String getCardFace() {
+////        if (this.isFaceDown)
+////            return this.cardFace;
+//        return "[#]";
+//    }
 
-    public void flip() {
-        isFaceDown = !isFaceDown;
-    }
-
-
-    public String getCardFace() {
-//        if (this.isFaceDown)
-//            return this.cardFace;
-        return "[#]";
-    }
->>>>>>> development
 }

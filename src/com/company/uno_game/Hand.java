@@ -1,8 +1,5 @@
 package com.company.uno_game;
-<<<<<<< HEAD
 
-=======
->>>>>>> development
 
 import com.company.card.Card;
 import com.company.card.UnoCard;
@@ -13,7 +10,7 @@ import java.util.List;
 public class Hand {
     private List<Card> cards = new ArrayList<>();
     private int bet = 0;
-<<<<<<< HEAD
+
 
     private String holder;
     
@@ -21,9 +18,6 @@ public class Hand {
     public Hand(String holder) {
         this.holder = holder;
     }
-=======
-    //private Player player;
->>>>>>> development
 
     public void addCard(Card card) {
         cards.add(card);
@@ -33,16 +27,8 @@ public class Hand {
         StringBuilder output = new StringBuilder();
         for (Card card : cards) {
             output.append(card.display()).append(" ");
-        }
 
-<<<<<<< HEAD
-        return output.toString().trim();
     }
-
-
-
-
-=======
         return output.toString();
     }
 
@@ -75,7 +61,7 @@ public class Hand {
         return cards.get(index);
     }
 
->>>>>>> development
+
 
     // removeCard method
     public Card removeCard(int index) {
@@ -83,18 +69,15 @@ public class Hand {
         return cards.remove(index);
     }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> development
 
-    public void revealHand() {
-        for (Card card : cards) {
-            if (card.getIsFaceDown()) {
-                card.flip();
-            }
-        }
-    }
+//    public void revealHand() {
+//        for (Card card : cards) {
+//            if (card.getIsFaceDown()) {
+//                card.flip();
+//            }
+//        }
+//    }
 
     public void discardHand() {
         cards.clear();

@@ -10,15 +10,14 @@ public class UnoCard extends Card {
         super(rank, suit);
     }
 
-<<<<<<< HEAD
-=======
+
 
 //    public UnoCard(int value, UnoColor color) {
 //        super(true);
 //        this.value = value;
 //        this.color = color;
 //    }
->>>>>>> development
+
 
 
     public int getRank() {
@@ -44,11 +43,11 @@ public class UnoCard extends Card {
 //    @Override
 //    public String toString() {
 //        StringBuilder cardOutput=new StringBuilder();
-<<<<<<< HEAD
+
 //        cardOutput.append(color).append(value).append(UnoColor.RESET);
-=======
+
 //        cardOutput.append(suit).append(rank).append(UnoColor.RESET);
->>>>>>> development
+
 //        return  cardOutput.toString();
 //               // color+UnoColor.RESET;
 //    }
