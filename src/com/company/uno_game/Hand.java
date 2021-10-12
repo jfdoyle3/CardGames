@@ -20,7 +20,7 @@ public class Hand {
             output.append(card.display()).append(" ");
         }
 
-        return output.toString().trim();
+        return output.toString();
     }
 
     public String displayValue() {
@@ -46,6 +46,39 @@ public class Hand {
         }
 
         return Integer.toString(score);
+    }
+
+    public Card getCard(int index) {
+        return cards.get(index);
+    }
+
+
+    // removeCard method
+    public Card removeCard(int index) {
+        // take card at index out of hand and return to table.
+        return cards.remove(index);
+    }
+
+
+
+    public void revealHand() {
+        for (Card card : cards) {
+            if (card.getIsFaceDown()) {
+                card.flip();
+            }
+        }
+    }
+
+    public void discardHand() {
+        cards.clear();
+    }
+
+    public int getShownRank() {
+        return cards.get(1).getRank();
+    }
+
+    public int getHandSize(){
+        return cards.size();
     }
 
 }
