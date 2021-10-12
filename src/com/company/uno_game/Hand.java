@@ -1,7 +1,8 @@
-package com.company.deck;
+package com.company.uno_game;
 
 
 import com.company.card.Card;
+import com.company.card.UnoCard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +10,11 @@ import java.util.List;
 public class Hand {
     private List<Card> cards = new ArrayList<>();
     private int bet = 0;
-    private Actor holder;
 
-    public static final byte PUSHPAY = 0;
-    public static final byte NORMALPAY = 1;
-    public static final byte BLACKJACKPAY = 2;
+    private String holder;
+    
 
-    public Hand(Actor holder) {
+    public Hand(String holder) {
         this.holder = holder;
     }
 
@@ -34,46 +33,7 @@ public class Hand {
 
 
 
-    // getting composition methods
-    // getter with no setter
-    // pass through method
-    public byte getAction(int dealer) {
-        return holder.getAction(this, dealer);
-    }
 
-    public int size() { return cards.size(); }
-
-    public int getBet() { return bet; }
-
-    public void placeBet() {
-        bet = holder.placeBet();
-    }
-
-    public int getBalance() { return holder.getBalance();}
-
-    public String getName() { return holder.getName(); }
-
-    // hasPair -> returns true if at least 1 pair is in the hand.
-    // isPair -> takes 2 cards and determines if pair
-    // countPair -> count all instances of pairs in a hand.
-    // checkPair -> check first two cards for pair
-    public boolean canSplit() {
-        return cards.get(0).getRank() == cards.get(1).getRank();
-    }
-
-    public void doubleBet() {
-        holder.addBalance(-bet);
-        bet *= 2;
-    }
-
-    public void payout(byte type) {
-        switch (type) {
-            case PUSHPAY -> holder.addBalance(bet);
-            case NORMALPAY -> holder.addBalance(bet * 2);
-            // TODO: add logic to game to trigger this payout when applicable
-            case BLACKJACKPAY -> holder.addBalance((int) (bet * 2.5));
-        }
-    }
 
     // removeCard method
     public Card removeCard(int index) {
@@ -81,14 +41,6 @@ public class Hand {
         return cards.remove(index);
     }
 
-    public Hand splitHand() {
-        // double bet
-        bet = bet / 2;
-        Hand hand = new Hand(holder);
-        hand.addCard(cards.remove(1));
-        hand.bet = bet;
-        return hand;
-    }
 
     public void revealHand() {
         for (Card card : cards) {

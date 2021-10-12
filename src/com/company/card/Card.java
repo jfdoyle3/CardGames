@@ -1,35 +1,36 @@
 package com.company.card;
 
+import com.company.deck.UnoColor;
+
 public abstract class Card {
-    protected boolean faceUpDown;
-    protected String cardFace;
 
+    protected int rank;
+    protected String suit;
+    protected boolean isFaceDown = true;
 
-    public Card(String cardFace) {
-        this.faceUpDown = false;
-        this.cardFace = cardFace;
+    public Card(int rank, String suit) {
+        this.rank = rank;
+        this.suit = suit;
     }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public String getSuit() {
+        return suit;
+    }
+
+    public boolean getIsFaceDown() {
+        return isFaceDown;
+    }
+
+    public abstract String display();
 
     public void flip() {
-        faceUpDown = !faceUpDown;
-    }
-
-    public String getCardFace() {
-        if (this.faceUpDown)
-            return this.cardFace;
-        return "[#]";
+        isFaceDown = !isFaceDown;
     }
 
 
-    @Override
-    public String toString() {
-        return "Card{ faceUpDown: " + faceUpDown + ", cardFace: '" + cardFace + " }";
-    }
 
-    public abstract char[] display();
-
-    public abstract int getRank();
-
-    public abstract boolean getIsFaceDown();
 }
-

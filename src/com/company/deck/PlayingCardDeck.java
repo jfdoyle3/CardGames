@@ -1,7 +1,7 @@
 package com.company.deck;
 
 
-import com.company.card.AltCard;
+import com.company.card.Card;
 import com.company.card.PlayingCard;
 
 import java.util.ArrayList;
@@ -12,37 +12,47 @@ public class PlayingCardDeck implements Deck {
 
     private final static UnoColor[] SUITS = {UnoColor.SPADES, UnoColor.HEARTS,UnoColor.CLUBS, UnoColor.DIAMONDS };
     private final static int[] VALUES = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11, 12, 13};
-    private List<AltCard> altCards;
+    private List<Card> cards;
     private boolean isEmpty=false;
 
     public PlayingCardDeck() {
-        altCards = new ArrayList<>();
+        cards = new ArrayList<>();
         for (var suit : SUITS) {
             for (var value : VALUES) {
-                altCards.add(new PlayingCard(value, suit.toString()));
+                cards.add(new PlayingCard(value, suit.toString()));
             }
         }
     }
 
 
     public void shuffle() {
-        Collections.shuffle(altCards);
+        Collections.shuffle(cards);
+    }
+
+    @Override
+    public Card draw() {
+        return cards.remove(cards.size() - 1);
     }
 
 
-    public AltCard draw(boolean facing) {
-        AltCard altCard = altCards.remove(altCards.size() - 1);
-        if (facing) altCard.flip();
-        return altCard;
+    public Card draw(boolean facing) {
+        Card card = cards.remove(cards.size() - 1);
+        if (facing) card.flip();
+        return card;
+    }
+
+    @Override
+    public Card flipDraw() {
+        return null;
     }
 
 
-    public boolean deckEmpty() {
-        return altCards.size() == 0;
+    public boolean isDeckEmpty() {
+        return cards.size() == 0;
     }
 
     public String toString() {
-        return "Deck [cards=" + altCards.toString() + "]";
+        return "Deck [cards=" + cards.toString() + "]";
     }
 
 }

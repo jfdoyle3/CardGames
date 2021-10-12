@@ -2,7 +2,7 @@ package com.company.card;
 
 import com.company.deck.UnoColor;
 
-public class UnoCard extends AltCard {
+public class UnoCard extends Card {
 
         private final int value;
         private final String color;
@@ -13,13 +13,7 @@ public class UnoCard extends AltCard {
         this.color = color;
     }
 
-//    public UnoCard(int value, UnoColor color) {
-//        super(true);
-//        this.value = value;
-//        this.color = color;
-//    }
 
-    // Abstract method for getters on Value/Rank , Color/Suit????
 
     public int getValue() {
         return value;
@@ -38,16 +32,16 @@ public class UnoCard extends AltCard {
 
     @Override
     public void flip() {
-
+        isFaceDown = !isFaceDown;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder cardOutput=new StringBuilder();
-        cardOutput.append(color).append(value).append(UnoColor.RESET);
-        return  cardOutput.toString();
-               // color+UnoColor.RESET;
-    }
+//    @Override
+//    public String toString() {
+//        StringBuilder cardOutput=new StringBuilder();
+//        cardOutput.append(color).append(value).append(UnoColor.RESET);
+//        return  cardOutput.toString();
+//               // color+UnoColor.RESET;
+//    }
 
     //    public String toString() {
 //        String output = switch (value) {
