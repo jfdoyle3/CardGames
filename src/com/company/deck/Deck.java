@@ -4,8 +4,7 @@ import com.company.card.Card;
 
 public interface Deck {
     void shuffle();
- Card unoDraw();
+    Card unoDraw();
     Card draw(boolean facing);
-
     boolean isDeckEmpty();
 }

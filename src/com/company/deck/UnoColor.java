@@ -13,8 +13,12 @@ public enum UnoColor {
     CLUBS("\033[1;90m"+"♧"+"\033[0m"),
     DIAMONDS ("\033[1;91m"+"♦"+"\033[0m"),
 
+    // ACTION CARDS
+  //  DRAW_TWO("\033[1;90m"+"DRAW"+"\033[0m"+" "+"\033[1;90m"+"2"+"\033[0m"),
+
     //Color end string, color reset
     RESET("\033[0m"),
+
 
     // Regular Colors. Normal color, no bold, background color etc.
     BLACK("\033[0;30m"),    // BLACK
