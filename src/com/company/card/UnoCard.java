@@ -35,13 +35,13 @@ public class UnoCard extends Card {
 
     }
 
-//    @Override
-//    public String toString() {
-//        StringBuilder cardOutput=new StringBuilder();
-//        cardOutput.append(suit).append(rank).append(UnoColor.RESET);
-//        return  cardOutput.toString();
-//               // color+UnoColor.RESET;
-//    }
+    @Override
+    public String toString() {
+        StringBuilder cardOutput=new StringBuilder();
+        cardOutput.append(suit).append(rank).append(UnoColor.RESET);
+        return  cardOutput.toString();
+               // color+UnoColor.RESET;
+    }
 
 }
 
