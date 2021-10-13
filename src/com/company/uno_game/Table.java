@@ -15,7 +15,10 @@ public class Table {
         }
         while(true) {
             System.out.println(hand.displayHand());
-            int card = Input.getInt("pick a card", 0, hand.getHandSize()-1, "enter a number.");
+            int min =0;
+            int max=hand.getHandSize()-1;
+            int card = Input.getInt("pick a card "+min+" thru "+max, min, max, "enter a number.");
+
             Card discard=hand.removeCard(card);
             System.out.println("Card Chosen: "+discard.display());
             if (hand.getHandSize() == 0)
