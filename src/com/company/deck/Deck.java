@@ -8,4 +8,5 @@ public interface Deck {
     Card draw(boolean facing);
 
     boolean isDeckEmpty();
+    int deckSize();
 }

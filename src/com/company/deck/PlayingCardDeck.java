@@ -46,6 +46,11 @@ public class PlayingCardDeck implements Deck {
         return false;
     }
 
+    @Override
+    public int deckSize() {
+        return cards.size();
+    }
+
 
     public boolean deckEmpty() {
         return cards.size() == 0;
