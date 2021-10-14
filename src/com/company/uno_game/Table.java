@@ -45,16 +45,14 @@ public class Table {
 
             // Menu Prompt
             int menu = Input.getInt("1. play\n2. draw", 1, 2, "enter a number.");
-            if (menu == 1) {
-
-                // Play Card
-                card = Input.getInt("pick a card " + min + " thru " + max, min, max, "enter a number.");
-                playCard(hand);
-
-            } else {
-
-                // Draw card
-                hand.addCard(deck.unoDraw());
+            switch(menu){
+                case 1 -> {
+                    // Play Card
+                    card = Input.getInt("pick a card " + min + " thru " + max, min, max, "enter a number.");
+                    playCard(hand);
+                }
+                case 2 -> hand.addCard(deck.unoDraw());
+                default -> System.out.println("Error!!");
             }
 
             //   Empty Hand breaks Loop
@@ -110,13 +108,15 @@ public class Table {
             int max = hand.getHandSize() - 1;
 
             int menu = Input.getInt("1. play\n2. draw", 1, 2, "enter a number.");
-            if (menu == 1) {
-                card = Input.getInt("pick a card " + min + " thru " + max, min, max, "enter a number.");
-                Card discard = hand.removeCard(card);
-
-            } else {
-                hand.addCard(deck.unoDraw());
+            switch(menu){
+                case 1 -> {
+                    card = Input.getInt("pick a card " + min + " thru " + max, min, max, "enter a number.");
+                    Card discard = hand.removeCard(card);
+                }
+                case 2 -> hand.addCard(deck.unoDraw());
+                default -> System.out.println("Error!!");
             }
+
             if (hand.getHandSize() == 0 || deck.isDeckEmpty())
                 break;
         }
