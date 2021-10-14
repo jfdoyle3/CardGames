@@ -23,30 +23,6 @@ public class Hand {
         return output.toString();
     }
 
-    public String displayValue() {
-        int score = 0;
-        boolean haveAce11 = false;
-        for (Card card : cards) {
-            int value = card.getRank();
-            switch (value) {
-                case 1 -> {
-                    value = score + 11 > 21 ? 1 : 11;
-                    if (value == 11) {
-                        haveAce11 = true;
-                    }
-                    score += value;
-                }
-                case 11, 12, 13 -> score += 10;
-                default -> score += value;
-            }
-            if(score > 21 && haveAce11) {
-                score -= 10;
-                haveAce11 = false;
-            }
-        }
-
-        return Integer.toString(score);
-    }
 
     public Card getCard(int index) {
         return cards.get(index);
@@ -58,7 +34,6 @@ public class Hand {
         // take card at index out of hand and return to table.
         return cards.remove(index);
     }
-
 
 
     public void revealHand() {
