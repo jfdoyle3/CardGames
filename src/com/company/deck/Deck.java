@@ -7,4 +7,5 @@ public interface Deck {
     Card unoDraw();
     Card draw(boolean facing);
     boolean isDeckEmpty();
+    int deckSize();
 }
