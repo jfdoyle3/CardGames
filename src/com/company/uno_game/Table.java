@@ -28,7 +28,7 @@ public class Table {
         //   System.out.println(deck.toString());
         deck.shuffle();
         dealHand(hand, deck, 7);
-        firstCard=deck.unoDraw();
+        firstCard = deck.unoDraw();
         discardPile.add(firstCard);
         turnDiscardDeck(hand, deck);
         //   gameTurn(hand, deck);
@@ -75,26 +75,20 @@ public class Table {
     }
 
     private void playCard(Hand hand) {
-      //  System.out.println("play hand method running");
-        Card playedCard = hand.removeCard(card);
 
-        // flip top card of deck  ..  if statement not needed.
-        if (discardPile.size() != 0) {
-            Card pile = discardPile.get(discardPile.size() - 1);
-            if(validateCardColor(playedCard,pile))
-                System.out.println("Yes - Color Matches");
-
-            else
-                System.out.println("No - No Match");
+        Card playedCard = hand.getCard(card);
+        Card pile=discardPile.get(discardPile.size() - 1);
+        if (validateCardColor(playedCard, pile) || validateCardValue(playedCard,pile)) {
+            discardPile.add(playedCard);
+            hand.removeCard(card);
         }
-        discardPile.add(playedCard);
-     //   showTopOfPile();
-      //  System.out.println("end of method");
+
+        System.out.println("Can't Play card.");
     }
 
     private void showTopOfPile() {
         if (discardPile.size() > 0) {
-            System.out.println(discardPile.get(discardPile.size() - 1)+"| :Discard Pile");
+            System.out.println(discardPile.get(discardPile.size() - 1) + "| :Discard Pile");
         } else {
             System.out.println("empty| :Discard Pile");
         }
@@ -156,20 +150,25 @@ public class Table {
         else
             System.out.println("C: False - False");
     }
-    private static boolean validateCardColor(Card cardA, Card cardB) {
+
+    private boolean validateCardColor(Card cardA, Card cardB) {
         return cardA.getSuit().equals(cardB.getSuit());
     }
 
-    private static void validateCardValue(UnoDeck deck) {
-        if (deck.getValue(0) == deck.getValue(1))
-            System.out.println("V: True");
-        else
-            System.out.println("V: False");
+    //    private static void validateCardValue(UnoDeck deck) {
+//        if (deck.getValue(0) == deck.getValue(1))
+//            System.out.println("V: True");
+//        else
+//            System.out.println("V: False");
+//    }
+    private boolean validateCardValue(Card cardA, Card cardB) {
+        return cardA.getRank() == cardB.getRank();
+
     }
 
     private static void validateCard(Card card) {
-        if(card.getRank()== card.getRank() &&
-           card.getSuit().equals(card.getSuit()))
+        if (card.getRank() == card.getRank() &&
+                card.getSuit().equals(card.getSuit()))
             System.out.println("V/C: True");
         else
             System.out.println("V/C: False");
