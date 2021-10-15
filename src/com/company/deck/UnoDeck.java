@@ -34,12 +34,12 @@ public class UnoDeck implements Deck {
             cards.add(new UnoCard(rand.nextInt(9), COLORS[rand.nextInt(4)].toString()));
         }
     }
-     public UnoDeck(int deckSize, Card card){
-        cards=new ArrayList<>();
-        for(int idx=0; idx< deckSize; idx++){
+
+    public UnoDeck(List<Card> cardList) {
+        cards = new ArrayList<>();
+        for(Card card : cardList)
             cards.add(card);
-        }
-     }
+    }
 //        for (int idx=0; idx<12; idx++) {
 //            for (UnoColor color : COLORS) {
 //                for (int value : ACTIONS)
