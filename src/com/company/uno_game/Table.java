@@ -20,6 +20,7 @@ public class Table {
      */
     private List<Card> discardPile = new ArrayList<>();
     private int card;
+    private Card firstCard;
 
     public void playGame() {
         Hand hand = new Hand();
@@ -27,6 +28,8 @@ public class Table {
         //   System.out.println(deck.toString());
         deck.shuffle();
         dealHand(hand, deck, 7);
+        firstCard=deck.unoDraw();
+        discardPile.add(firstCard);
         turnDiscardDeck(hand, deck);
         //   gameTurn(hand, deck);
 
@@ -37,21 +40,23 @@ public class Table {
         while (true) {
 
             // Display Hand
-            displayTable(hand,deck);
+            displayTable(hand, deck);
 
             // Pick Card by Index
             int min = 0;
             int max = hand.getHandSize() - 1;
 
             // Menu Prompt
-            int menu = Input.getInt("1. play\n2. draw", 1, 2, "enter a number.");
-            switch(menu){
+            int menu = Input.getInt("1. play\n2. draw", 0, 3, "enter a number.");
+            switch (menu) {
+                case 0 -> System.exit(0);
                 case 1 -> {
                     // Play Card
                     card = Input.getInt("pick a card " + min + " thru " + max, min, max, "enter a number.");
                     playCard(hand);
                 }
                 case 2 -> hand.addCard(deck.unoDraw());
+                case 3 -> displayDiscardPile();
                 default -> System.out.println("Error!!");
             }
 
@@ -64,27 +69,34 @@ public class Table {
     }
 
     private void displayTable(Hand hand, Deck deck) {
-        System.out.print("Deck: "+deck.deckSize()+" ");
+        System.out.print("Deck: |" + deck.deckSize() + "| |");
         showTopOfPile();
         showHand(hand);
     }
 
     private void playCard(Hand hand) {
-        Card discard = hand.removeCard(card);
-        discardPile.add(discard);
-        showTopOfPile();
+      //  System.out.println("play hand method running");
+        Card playedCard = hand.removeCard(card);
 
-        //       displayDiscardPile();
+        // flip top card of deck  ..  if statement not needed.
+        if (discardPile.size() != 0) {
+            Card pile = discardPile.get(discardPile.size() - 1);
+            if(validateCardColor(playedCard,pile))
+                System.out.println("Yes - Color Matches");
 
-
+            else
+                System.out.println("No - No Match");
+        }
+        discardPile.add(playedCard);
+     //   showTopOfPile();
+      //  System.out.println("end of method");
     }
 
     private void showTopOfPile() {
-
         if (discardPile.size() > 0) {
-            System.out.println(discardPile.get(discardPile.size() - 1));
+            System.out.println(discardPile.get(discardPile.size() - 1)+"| :Discard Pile");
         } else {
-            System.out.println("Discard pile empty");
+            System.out.println("empty| :Discard Pile");
         }
     }
 
@@ -107,12 +119,13 @@ public class Table {
             int min = 0;
             int max = hand.getHandSize() - 1;
 
-            int menu = Input.getInt("1. play\n2. draw", 1, 2, "enter a number.");
-            switch(menu){
+            int menu = Input.getInt("1. play\n2. draw", 0, 3, "enter a number.");
+            switch (menu) {
                 case 1 -> {
                     card = Input.getInt("pick a card " + min + " thru " + max, min, max, "enter a number.");
                     Card discard = hand.removeCard(card);
                 }
+                case 3 -> displayDiscardPile();
                 case 2 -> hand.addCard(deck.unoDraw());
                 default -> System.out.println("Error!!");
             }
@@ -127,6 +140,39 @@ public class Table {
         for (int crd = 0; crd < handCount; crd++) {
             hand.addCard(deck.unoDraw());
         }
+    }
+    //   validateCard(carda, cardb);
+
+    // Comparing Card Value
+    //  validateCardValue(card);
+
+
+    //Compare Card Color
+
+
+    private static void validateCardColorZ(Card cardA, Card cardB) {
+        if (cardA.getSuit().equals(cardB.getSuit()))
+            System.out.println("C: True- Colors Match");
+        else
+            System.out.println("C: False - False");
+    }
+    private static boolean validateCardColor(Card cardA, Card cardB) {
+        return cardA.getSuit().equals(cardB.getSuit());
+    }
+
+    private static void validateCardValue(UnoDeck deck) {
+        if (deck.getValue(0) == deck.getValue(1))
+            System.out.println("V: True");
+        else
+            System.out.println("V: False");
+    }
+
+    private static void validateCard(Card card) {
+        if(card.getRank()== card.getRank() &&
+           card.getSuit().equals(card.getSuit()))
+            System.out.println("V/C: True");
+        else
+            System.out.println("V/C: False");
     }
 
 
