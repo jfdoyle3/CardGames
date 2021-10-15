@@ -75,14 +75,12 @@ public class Table {
     }
 
     private void playCard(Hand hand) {
-
         Card playedCard = hand.getCard(card);
         Card pile=discardPile.get(discardPile.size() - 1);
         if (validateCardColor(playedCard, pile) || validateCardValue(playedCard,pile)) {
             discardPile.add(playedCard);
             hand.removeCard(card);
         }
-
         System.out.println("Can't Play card.");
     }
 
@@ -135,13 +133,10 @@ public class Table {
             hand.addCard(deck.unoDraw());
         }
     }
-    //   validateCard(carda, cardb);
 
     // Comparing Card Value
     //  validateCardValue(card);
 
-
-    //Compare Card Color
 
 
     private static void validateCardColorZ(Card cardA, Card cardB) {
