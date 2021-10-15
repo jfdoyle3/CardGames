@@ -1,5 +1,6 @@
 package com.company.uno_game;
 
+import com.company.actors.Player;
 import com.company.card.Card;
 
 import java.util.ArrayList;
@@ -8,7 +9,11 @@ import java.util.List;
 public class Hand {
     private List<Card> cards = new ArrayList<>();
     private int bet = 0;
-    //private Player player;
+    private Player player;
+
+    public Hand(Player player){
+        this.player=player;
+    }
 
     public void addCard(Card card) {
         cards.add(card);
@@ -22,7 +27,9 @@ public class Hand {
 
         return output.toString();
     }
-
+    public String getName(){
+        return player.getName();
+    }
 
     public Card getCard(int index) {
         return cards.get(index);

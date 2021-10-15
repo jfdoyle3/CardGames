@@ -1,4 +1,4 @@
-package com.company.console;
+package com.company.ui;
 
 import java.util.Scanner;
 

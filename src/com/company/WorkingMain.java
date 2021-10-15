@@ -1,7 +1,7 @@
 package com.company;
 
 import com.company.card.Card;
-import com.company.console.Input;
+import com.company.ui.Input;
 import com.company.deck.UnoDeck;
 
 import java.util.ArrayList;
