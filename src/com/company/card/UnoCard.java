@@ -5,12 +5,9 @@ import com.company.deck.UnoColor;
 public class UnoCard extends Card {
 
 
-
     public UnoCard(int rank, String suit) {
         super(rank, suit);
     }
-
-
 
 
     // Abstract method for getters on Value/Rank , Color/Suit????
@@ -25,9 +22,12 @@ public class UnoCard extends Card {
 
     @Override
     public String display() {
-        StringBuilder cardOutput=new StringBuilder();
-        cardOutput.append(suit).append(rank).append(UnoColor.RESET);
-        return  cardOutput.toString();
+        StringBuilder cardOutput = new StringBuilder();
+        if (rank == 10)
+            cardOutput.append(suit).append("D2").append(UnoColor.RESET);
+        else
+            cardOutput.append(suit).append(rank).append(UnoColor.RESET);
+        return cardOutput.toString();
     }
 
     @Override
@@ -37,10 +37,10 @@ public class UnoCard extends Card {
 
     @Override
     public String toString() {
-        StringBuilder cardOutput=new StringBuilder();
+        StringBuilder cardOutput = new StringBuilder();
         cardOutput.append(suit).append(rank).append(UnoColor.RESET);
-        return  cardOutput.toString();
-               // color+UnoColor.RESET;
+        return cardOutput.toString();
+        // color+UnoColor.RESET;
     }
 
 }
