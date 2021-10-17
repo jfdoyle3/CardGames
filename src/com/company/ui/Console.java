@@ -22,7 +22,7 @@ public class Console {
 
     private static void showTopOfPile(List<Card> discardPile) {
         if (discardPile.size() > 0) {
-            System.out.println(discardPile.get(discardPile.size() - 1) + "| :Discard Pile");
+            System.out.println(discardPile.get(discardPile.size() - 1).display() + "| :Discard Pile");
         } else {
             System.out.println("empty| :Discard Pile");
         }
