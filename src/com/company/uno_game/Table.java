@@ -28,35 +28,41 @@ public class Table {
     public void playGame() {
         //Add Players
         players.add(new Hand(new Player("Player 1")));
-    //    players.add(new Hand(new Player("Player 2")));
-     //   Hand hand = new Hand(new Player("Player 1"));
-        Hand hand=players.get(0);
+      //  players.add(new Hand(new Player("Player 2")));
+     //  Hand hand = new Hand(new Player("Player 1"));
+       Hand hand=players.get(0);
         // Create Deck / Shuffle
-        UnoDeck deck = new UnoDeck(10);
+        UnoDeck deck = new UnoDeck();
+        System.out.println(deck);
         deck.shuffle();
 
 
-        //
-           for (int idx = 0; idx < players.size(); idx++) {
-               dealHand(players.get(idx), deck, 4);
+      //  for(Hand hand : players)
+      //    for (int idx = 0; idx < players.size(); idx++) {
+               dealHand(hand, deck, 7);
                //        Hand hand = new Hand(new Player("Player 1"));
-           }
+       //    }
 
         firstCard = deck.unoDraw();
         discardPile.add(firstCard);
-        Console.displayTable(0, players.get(0), deck, discardPile, players);
+      //  Console.displayTable(0, players.get(0), deck, discardPile, players);
       //  System.out.println("\n");
      //   Console.displayTable(1, players.get(1), deck, discardPile, players);
-        gameTurn(hand, deck);
+     //   while(true){
+     //   for(Hand hand : players) {
+           // Console.displayTable(hand, deck, discardPile);
+            gameTurn(hand, deck);
+     //   }
+     //   }
         //  }
     }
 
     private void gameTurn(Hand hand, UnoDeck deck) {
 
-        while (true) {
-
+      //  while (true) {
+            boolean end=false;
             // Display Hand
-            Console.displayTable(0, hand, deck, discardPile, players);
+            Console.displayTable(hand, deck, discardPile);
 
             // Pick Card by Index
             int min = 0;
@@ -66,13 +72,15 @@ public class Table {
             menuPrompt(hand, deck, min, max);
 
             //   Empty Hand breaks Loop
-            if (hand.getHandSize() == 0 || deck.isDeckEmpty())
-                break;
-        }
+//            if (end ||hand.getHandSize() == 0 || deck.isDeckEmpty())
+//                break;
+       // }
         if(deck.isDeckEmpty()) {
             System.out.println("deck ran out of cards");
             Deck newDeck=restackDeck();
+            deck= (UnoDeck) newDeck;
         }
+
         System.out.println("end of line.");
     }
 
@@ -86,7 +94,7 @@ public class Table {
     }
 
     private void menuPrompt(Hand hand, UnoDeck deck, int min, int max) {
-        int menu = Input.getInt("1. play\n2. draw", 0, 3, "enter a number.");
+        int menu = Input.getInt("1. play\n2. draw", 0, 4, "enter a number.");
         switch (menu) {
             case 0 -> System.exit(0);
             case 1 -> {
@@ -96,6 +104,9 @@ public class Table {
             }
             case 2 -> hand.addCard(deck.unoDraw());
             case 3 -> Console.displayDiscardPile(discardPile);
+            case 4 ->{
+                boolean end = true;
+            }
             default -> System.out.println("Error!!");
         }
     }
@@ -104,10 +115,10 @@ public class Table {
         Card playedCard = hand.getCard(card);
         Card pile = discardPile.get(discardPile.size() - 1);
 
-       // if (validateCardColor(playedCard, pile) || validateCardValue(playedCard, pile)) {
+        if (validateCardColor(playedCard, pile) || validateCardValue(playedCard, pile)) {
             discardPile.add(playedCard);
             hand.removeCard(card);
-       // }
+       }
       //  System.out.println("Can't Play card.");
     }
 
