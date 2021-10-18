@@ -28,20 +28,15 @@ public class Table {
     public void playGame() {
         //Add Players
         players.add(new Hand(new Player("Player 1")));
-      //  players.add(new Hand(new Player("Player 2")));
-     //  Hand hand = new Hand(new Player("Player 1"));
-       Hand hand=players.get(0);
+        players.add(new Hand(new Player("Player 2")));
+
         // Create Deck / Shuffle
         UnoDeck deck = new UnoDeck();
         System.out.println(deck);
         deck.shuffle();
 
-
-      //  for(Hand hand : players)
-      //    for (int idx = 0; idx < players.size(); idx++) {
-               dealHand(hand, deck, 7);
-               //        Hand hand = new Hand(new Player("Player 1"));
-       //    }
+        for(Hand hand : players)
+            dealHand(hand, deck, 7);
 
         firstCard = deck.unoDraw();
         discardPile.add(firstCard);
@@ -49,10 +44,13 @@ public class Table {
       //  System.out.println("\n");
      //   Console.displayTable(1, players.get(1), deck, discardPile, players);
      //   while(true){
-     //   for(Hand hand : players) {
-           // Console.displayTable(hand, deck, discardPile);
+      //  for(Hand hand : players) {
+        while(true) {
+            for(Hand hand : players)
+            // Console.displayTable(hand, deck, discardPile);
             gameTurn(hand, deck);
-     //   }
+        }
+     //  }
      //   }
         //  }
     }
@@ -81,7 +79,7 @@ public class Table {
             deck= (UnoDeck) newDeck;
         }
 
-        System.out.println("end of line.");
+        System.out.println("end of Turn");
     }
 
     private Deck restackDeck() {
@@ -100,7 +98,7 @@ public class Table {
             case 1 -> {
                 // Play Card
                 card = Input.getInt("pick a card " + min + " thru " + max, min, max, "enter a number.");
-                playCard(hand);
+                playCard(hand, deck);
             }
             case 2 -> hand.addCard(deck.unoDraw());
             case 3 -> Console.displayDiscardPile(discardPile);
@@ -111,15 +109,24 @@ public class Table {
         }
     }
 
-    private void playCard(Hand hand) {
+    private void playCard(Hand hand, Deck deck) {
         Card playedCard = hand.getCard(card);
         Card pile = discardPile.get(discardPile.size() - 1);
 
         if (validateCardColor(playedCard, pile) || validateCardValue(playedCard, pile)) {
+
             discardPile.add(playedCard);
             hand.removeCard(card);
+            if(playedCard.getRank()==10)
+                drawTwo(hand, deck);
        }
       //  System.out.println("Can't Play card.");
+    }
+
+    private void drawTwo(Hand hand, Deck deck) {
+        hand.addCard(deck.unoDraw());
+        hand.addCard(deck.unoDraw());
+
     }
 
 
