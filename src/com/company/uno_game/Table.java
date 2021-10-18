@@ -13,17 +13,11 @@ import java.util.List;
 
 public class Table {
 
-    /*
-       discard deck:
-       build a new deck
-       list Card
-       LinkedList Card
-
-     */
     private List<Card> discardPile = new ArrayList<>();
     private List<Hand> players = new ArrayList<>();
     private int card;
     private Card firstCard;
+    private boolean actionCardUsed = false;
 
     public void playGame() {
         //Add Players
@@ -31,60 +25,61 @@ public class Table {
         players.add(new Hand(new Player("Player 2")));
 
         // Create Deck / Shuffle
-        UnoDeck deck = new UnoDeck();
-        System.out.println(deck);
+        UnoDeck deck = new UnoDeck(10);
+
         deck.shuffle();
 
-        for(Hand hand : players)
-            dealHand(hand, deck, 7);
+        for (Hand hand : players)
+            dealHand(hand, deck, 3);
 
         firstCard = deck.unoDraw();
         discardPile.add(firstCard);
-      //  Console.displayTable(0, players.get(0), deck, discardPile, players);
-      //  System.out.println("\n");
-     //   Console.displayTable(1, players.get(1), deck, discardPile, players);
-     //   while(true){
-      //  for(Hand hand : players) {
-        while(true) {
-            for(Hand hand : players)
-            // Console.displayTable(hand, deck, discardPile);
-            gameTurn(hand, deck);
+
+        while (true) {
+            for (Hand hand : players) {
+                if (deck.isDeckEmpty()) {
+                    System.out.println("deck ran out of cards\nCreating a new deck!");
+                    Deck newDeck = restackDeck();
+                    deck = (UnoDeck) newDeck;
+                }
+                // Console.displayTable(hand, deck, discardPile);
+                if (hand.getHandSize() != 0)
+                    gameTurn(hand, deck);
+                else {
+                    endGame(hand);
+                    break;
+                }
+            }
         }
-     //  }
-     //   }
-        //  }
+
     }
+
+    private void endGame(Hand hand) {
+        System.out.println(hand.getName() + " Wins");
+        System.exit(0);
+    }
+
 
     private void gameTurn(Hand hand, UnoDeck deck) {
 
-      //  while (true) {
-            boolean end=false;
-            // Display Hand
-            Console.displayTable(hand, deck, discardPile);
+        //  while (true) {
+        boolean end = false;
+        // Display Hand
+        Console.displayTable(hand, deck, discardPile);
 
-            // Pick Card by Index
-            int min = 0;
-            int max = hand.getHandSize() - 1;
+        // Pick Card by Index
+        int min = 0;
+        int max = hand.getHandSize() - 1;
 
-            // Menu Prompt
-            menuPrompt(hand, deck, min, max);
-
-            //   Empty Hand breaks Loop
-//            if (end ||hand.getHandSize() == 0 || deck.isDeckEmpty())
-//                break;
-       // }
-        if(deck.isDeckEmpty()) {
-            System.out.println("deck ran out of cards");
-            Deck newDeck=restackDeck();
-            deck= (UnoDeck) newDeck;
-        }
+        // Menu Prompt
+        menuPrompt(hand, deck, min, max);
 
         System.out.println("end of Turn");
     }
 
     private Deck restackDeck() {
-        Card topCard=discardPile.remove(discardPile.size()-1);
-        Deck newDeck=new UnoDeck(discardPile);
+        Card topCard = discardPile.remove(discardPile.size() - 1);
+        Deck newDeck = new UnoDeck(discardPile);
         newDeck.shuffle();
         discardPile.clear();
         discardPile.add(topCard);
@@ -102,7 +97,7 @@ public class Table {
             }
             case 2 -> hand.addCard(deck.unoDraw());
             case 3 -> Console.displayDiscardPile(discardPile);
-            case 4 ->{
+            case 4 -> {
                 boolean end = true;
             }
             default -> System.out.println("Error!!");
@@ -114,13 +109,16 @@ public class Table {
         Card pile = discardPile.get(discardPile.size() - 1);
 
         if (validateCardColor(playedCard, pile) || validateCardValue(playedCard, pile)) {
-
             discardPile.add(playedCard);
             hand.removeCard(card);
-            if(playedCard.getRank()==10)
-                drawTwo(hand, deck);
-       }
-      //  System.out.println("Can't Play card.");
+
+            if (playedCard.getRank() == 10) {
+                actionCardUsed = true;
+                System.out.println("---> Draw 2 Has been played!!<--");
+
+            }
+        }
+        //  System.out.println("Can't Play card.");
     }
 
     private void drawTwo(Hand hand, Deck deck) {
