@@ -53,7 +53,13 @@ public class Table {
                 }
             }
         }
-
+        // use neg numbers to reverse game flow.
+//        int nextPlayer=0;
+//        Boolean endGame=false;
+//        do{
+//
+//            endGame=true;
+//        }while(endGame);
     }
 
     private void endGame(Hand hand) {
@@ -86,10 +92,6 @@ public class Table {
             isDraw2=false;
         }
         else {
-
-            // Pick Card by Index
-//            int min = 0;
-//            int max = hand.getHandSize() - 1;
 
             // Menu Prompt
             menuPrompt(hand, deck, min, max);
