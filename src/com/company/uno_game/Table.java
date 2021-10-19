@@ -17,7 +17,9 @@ public class Table {
     private List<Hand> players = new ArrayList<>();
     private int card;
     private Card firstCard;
-    private boolean actionCardUsed = false;
+    private boolean isDraw2 = false;
+    private boolean isSkip=false;
+
 
     public void playGame() {
         //Add Players
@@ -25,12 +27,12 @@ public class Table {
         players.add(new Hand(new Player("Player 2")));
 
         // Create Deck / Shuffle
-        UnoDeck deck = new UnoDeck(10);
-
+        UnoDeck deck = new UnoDeck();
+        System.out.println(deck);
         deck.shuffle();
 
         for (Hand hand : players)
-            dealHand(hand, deck, 3);
+            dealHand(hand, deck, 7);
 
         firstCard = deck.unoDraw();
         discardPile.add(firstCard);
@@ -65,14 +67,43 @@ public class Table {
         //  while (true) {
         boolean end = false;
         // Display Hand
-        Console.displayTable(hand, deck, discardPile);
-
-        // Pick Card by Index
         int min = 0;
         int max = hand.getHandSize() - 1;
+        Console.displayTable(hand, deck, discardPile);
+        switch (discardPile.get(discardPile.size()-1).getRank()){
+            case 10 -> {drawTwo(hand, deck);
+                        isDraw2=false;}
+            case 12 -> System.out.println("Skipped");
+            case 11 -> System.out.println("Reverse");
+            default -> menuPrompt(hand, deck, min, max);
 
-        // Menu Prompt
-        menuPrompt(hand, deck, min, max);
+        }
+
+//        if(isDraw2){
+//            drawTwo(hand,deck);
+//            isDraw2=false;
+//        }
+//        else {
+//
+//            // Pick Card by Index
+//            int min = 0;
+//            int max = hand.getHandSize() - 1;
+//
+//            // Menu Prompt
+//            menuPrompt(hand, deck, min, max);
+//        }
+//        if(isSkip){
+//            isSkip=false;
+//        }
+//        else {
+//
+//            // Pick Card by Index
+//            int min = 0;
+//            int max = hand.getHandSize() - 1;
+//
+//            // Menu Prompt
+//            menuPrompt(hand, deck, min, max);
+//        }
 
         System.out.println("end of Turn");
     }
@@ -105,21 +136,24 @@ public class Table {
     }
 
     private void playCard(Hand hand, Deck deck) {
+
         Card playedCard = hand.getCard(card);
         Card pile = discardPile.get(discardPile.size() - 1);
 
-        if (validateCardColor(playedCard, pile) || validateCardValue(playedCard, pile)) {
-            discardPile.add(playedCard);
-            hand.removeCard(card);
+        //   if (validateCardColor(playedCard, pile) || validateCardValue(playedCard, pile)) {
+        discardPile.add(playedCard);
+        hand.removeCard(card);
 
+        if (playedCard.getRank() == 10) {
+                isDraw2 = true;
+                }
             if (playedCard.getRank() == 10) {
-                actionCardUsed = true;
-                System.out.println("---> Draw 2 Has been played!!<--");
-
+                isDraw2 = true;
             }
         }
-        //  System.out.println("Can't Play card.");
-    }
+       // System.out.println("Can't Play card.");
+
+
 
     private void drawTwo(Hand hand, Deck deck) {
         hand.addCard(deck.unoDraw());

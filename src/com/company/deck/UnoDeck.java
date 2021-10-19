@@ -27,6 +27,8 @@ public class UnoDeck implements Deck {
             cards.add(new UnoCard(0, color.toString()));
             cards.add(new UnoCard(ACTIONS[0],color.toString()));
             cards.add(new UnoCard(ACTIONS[0],color.toString()));
+            cards.add(new UnoCard(ACTIONS[2],color.toString()));
+            cards.add(new UnoCard(ACTIONS[2],color.toString()));
 
         }
     }
