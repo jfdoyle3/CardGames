@@ -70,28 +70,30 @@ public class Table {
         int min = 0;
         int max = hand.getHandSize() - 1;
         Console.displayTable(hand, deck, discardPile);
-        switch (discardPile.get(discardPile.size()-1).getRank()){
-            case 10 -> {drawTwo(hand, deck);
-                        isDraw2=false;}
-            case 12 -> System.out.println("Skipped");
-            case 11 -> System.out.println("Reverse");
-            default -> menuPrompt(hand, deck, min, max);
-
-        }
-
-//        if(isDraw2){
-//            drawTwo(hand,deck);
-//            isDraw2=false;
-//        }
-//        else {
+//        switch (discardPile.get(discardPile.size()-1).getRank()){
+//            case 10 -> {drawTwo(hand, deck);
+//                        isDraw2=false;}
+//            case 12 -> System.out.println("Skipped");
+//            case 11 -> System.out.println("Reverse");
+//            default -> menuPrompt(hand, deck, min, max);
 //
-//            // Pick Card by Index
+//        }
+
+        if(isDraw2){
+            System.out.println("-->"+hand.getName()+" Hand: "+hand.getHandSize());
+            drawTwo(hand,deck);
+            System.out.println("--> +2 : "+hand.getHandSize());
+            isDraw2=false;
+        }
+        else {
+
+            // Pick Card by Index
 //            int min = 0;
 //            int max = hand.getHandSize() - 1;
-//
-//            // Menu Prompt
-//            menuPrompt(hand, deck, min, max);
-//        }
+
+            // Menu Prompt
+            menuPrompt(hand, deck, min, max);
+        }
 //        if(isSkip){
 //            isSkip=false;
 //        }
@@ -140,17 +142,19 @@ public class Table {
         Card playedCard = hand.getCard(card);
         Card pile = discardPile.get(discardPile.size() - 1);
 
-        //   if (validateCardColor(playedCard, pile) || validateCardValue(playedCard, pile)) {
-        discardPile.add(playedCard);
-        hand.removeCard(card);
+        if (validateCardColor(playedCard, pile) || validateCardValue(playedCard, pile)) {
+            discardPile.add(playedCard);
+            hand.removeCard(card);
 
-        if (playedCard.getRank() == 10) {
-                isDraw2 = true;
-                }
             if (playedCard.getRank() == 10) {
                 isDraw2 = true;
             }
+//        if (playedCard.getRank() == 10) {
+//            isDraw2 = true;
+//        }
+
         }
+    }
        // System.out.println("Can't Play card.");
 
 
