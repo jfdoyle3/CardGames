@@ -22,7 +22,7 @@ public class Console {
 
     private static void showTopOfPile(List<Card> discardPile) {
         if (discardPile.size() > 0) {
-            System.out.println(discardPile.get(discardPile.size() - 1) + "| :Discard Pile");
+            System.out.println(discardPile.get(discardPile.size() - 1).display() + "| :Discard Pile");
         } else {
             System.out.println("empty| :Discard Pile");
         }
@@ -32,8 +32,8 @@ public class Console {
         System.out.println(hand.displayHand());
     }
 
-    public static void displayTable(int idx, Hand hand, Deck deck, List<Card> discardPile, List<Hand> players) {
-        System.out.println(players.get(idx).getName());
+    public static void displayTable( Hand hand, Deck deck, List<Card> discardPile) {
+        System.out.println(hand.getName());
         System.out.print("Deck: |" + deck.deckSize() + "| |");
         showTopOfPile(discardPile);
         showHand(hand);

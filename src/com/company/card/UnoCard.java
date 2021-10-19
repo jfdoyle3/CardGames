@@ -25,9 +25,32 @@ public class UnoCard extends Card {
 
     @Override
     public String display() {
+     //   System.out.println("Display Method");
         StringBuilder cardOutput=new StringBuilder();
-        cardOutput.append(suit).append(rank).append(UnoColor.RESET);
+
+        switch(rank) {
+            case 10 -> cardOutput.append(suit).append("D2").append(UnoColor.RESET);
+            case 11 -> cardOutput.append(suit).append("Reverse").append(UnoColor.RESET);
+            case 12 -> cardOutput.append(suit).append("Skip").append(UnoColor.RESET);
+            default->
+                cardOutput.append(suit).append(rank).append(UnoColor.RESET);
+        }
+//
+//        if(rank==10)
+//
+//
+
+//        if(rank==11)
+//       cardOutput.append(suit).append("Reverse").append(UnoColor.RESET);
+//                else
+//        cardOutput.append(suit).append(rank).append(UnoColor.RESET);
+
+//        if(rank==12)
+//            cardOutput.append(suit).append("Skip").append(UnoColor.RESET);
+
+
         return  cardOutput.toString();
+
     }
 
     @Override
@@ -38,6 +61,7 @@ public class UnoCard extends Card {
     @Override
     public String toString() {
         StringBuilder cardOutput=new StringBuilder();
+       // cardOutput.append("toString: ").append(suit).append(rank).append(UnoColor.RESET);
         cardOutput.append(suit).append(rank).append(UnoColor.RESET);
         return  cardOutput.toString();
                // color+UnoColor.RESET;
