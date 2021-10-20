@@ -22,6 +22,9 @@ public class Table {
 
 
     public void playGame() {
+
+        // Game loop: List Iterator, Queue
+
         //Add Players
         players.add(new Hand(new Player("Player 1")));
         players.add(new Hand(new Player("Player 2")));
@@ -40,7 +43,6 @@ public class Table {
         while (true) {
             for (Hand hand : players) {
                 if (deck.isDeckEmpty()) {
-                    System.out.println("deck ran out of cards\nCreating a new deck!");
                     Deck newDeck = restackDeck();
                     deck = (UnoDeck) newDeck;
                 }
