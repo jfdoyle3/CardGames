@@ -115,8 +115,6 @@ public class itrList {
                 li = intList.listIterator(intList.size());
                 int index = revList();
                 System.out.println("Player "+index+" is next");
-
-
             }
         }
     }
@@ -137,6 +135,8 @@ public class itrList {
             if (reverseCard.nextBoolean()) {
                 System.out.println(li.previous()+" played a reverse card.");
                 li.next();
+                if (!li.hasNext())
+                    li = intList.listIterator(0);
                 index = li.nextIndex();
                 break;
             }
