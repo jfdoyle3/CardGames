@@ -40,11 +40,12 @@ public class Table {
         while (true) {
             for (Hand hand : players) {
                 if (deck.isDeckEmpty()) {
-                    System.out.println("deck ran out of cards\nCreating a new deck!");
+                  //  System.out.println("deck ran out of cards\nCreating a new deck!");
                     Deck newDeck = restackDeck();
                     deck = (UnoDeck) newDeck;
                 }
                 // Console.displayTable(hand, deck, discardPile);
+                //turn ends game on empty hand
                 if (hand.getHandSize() != 0)
                     gameTurn(hand, deck);
                 else {
