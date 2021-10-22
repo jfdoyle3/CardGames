@@ -6,8 +6,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        Table table=new Table();
-//        table.playGame();
+        Table table=new Table();
+        table.playGameQueue();
 
 //        for(int idx=0; idx<10;){
 //
@@ -17,7 +17,6 @@ public class Main {
 //            //reverse;
 //            idx--;
 //        }
-        itrList.itrThruList();
 
     }
 }
