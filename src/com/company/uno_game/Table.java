@@ -8,18 +8,30 @@ import com.company.deck.Deck;
 import com.company.deck.UnoDeck;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 
 public class Table {
 
     private List<Card> discardPile = new ArrayList<>();
-    private List<Hand> players = new ArrayList<>();
+    private Queue<Hand> players = new LinkedList<>();
     private int card;
     private Card firstCard;
     private boolean isDraw2 = false;
-    private boolean isSkip=false;
+    private boolean isSkip = false;
 
+    public void playGameQueue() {
+        //Add Players
+        for (int idx = 1; idx < 4; idx++) {
+            players.add(new Hand(new Player("Player " + idx)));
+//        players.add(new Hand(new Player("Player 2")));
+//        players.add(new Hand(new Player("Player 3")));
+//        players.add(new Hand(new Player("Player 4")));
+        }
+
+    }
 
     public void playGame() {
         //Add Players
@@ -80,13 +92,12 @@ public class Table {
 //
 //        }
 
-        if(isDraw2){
-            System.out.println("-->"+hand.getName()+" Hand: "+hand.getHandSize());
-            drawTwo(hand,deck);
-            System.out.println("--> +2 : "+hand.getHandSize());
-            isDraw2=false;
-        }
-        else {
+        if (isDraw2) {
+            System.out.println("-->" + hand.getName() + " Hand: " + hand.getHandSize());
+            drawTwo(hand, deck);
+            System.out.println("--> +2 : " + hand.getHandSize());
+            isDraw2 = false;
+        } else {
 
             // Pick Card by Index
 //            int min = 0;
@@ -156,8 +167,7 @@ public class Table {
 
         }
     }
-       // System.out.println("Can't Play card.");
-
+    // System.out.println("Can't Play card.");
 
 
     private void drawTwo(Hand hand, Deck deck) {

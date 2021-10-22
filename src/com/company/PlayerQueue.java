@@ -8,9 +8,10 @@ public class PlayerQueue {
 
 
     private static Queue<Integer> players= new LinkedList<>();
+    private static String line="-|-";
     public static void main(String args[])
     {
-        populateQueue(4);
+        populateQueue(3);
         display();
 
 
@@ -18,15 +19,16 @@ public class PlayerQueue {
         for(int i=0; i<3; i++)
             qFwd();
         // players turn
-        // skip cars use qfwd();
-        // reverse replace currebt queue
-
+        // skip cards use qFwd();
+        // reverse replace current queue
 
         display();
+        System.out.println("\n"+line.repeat(6));
         System.out.println("Reverse Card Played");
+        System.out.println(line.repeat(6));
         reverse(players);
         display();
-        for(int i=0; i<4; i++)
+        for(int i=0; i<2; i++)
             qFwd();
         display();
 
@@ -37,29 +39,23 @@ public class PlayerQueue {
     }
 
     private static void display(){
-        System.out.println(players);
+        System.out.print("Player Queue: ");
+        System.out.print(players+"\n");
     }
 
     private static void qFwd(){
         int playerNum=players.poll();
-        System.out.println("Player "+playerNum);
+        System.out.println("Player "+playerNum+" take their turn");
         players.add(playerNum);
     }
 
     private static void reverse(Queue<Integer> q){
-        Stack<Integer> s = new Stack<>();  //create a stack
-
-        //while the queue is not empty
-        while(!q.isEmpty())
-        {  //add the elements of the queue onto a stack
+        Stack<Integer> s = new Stack<>();
+        while(!q.isEmpty()) {
             s.push(q.poll());
         }
-
-        //while the stack is not empty
-        while(!s.isEmpty())
-        { //add the elements in the stack back to the queue
+        while(!s.isEmpty()) {
             q.add(s.pop());
         }
-
     }
 }
