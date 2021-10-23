@@ -22,7 +22,7 @@ public class Hand {
     public String displayHand() {
         StringBuilder output = new StringBuilder();
         for (Card card : cards) {
-            output.append(card.display()).append(" ");
+            output.append(card.display()).append("\t");
         }
         return output.toString();
     }
