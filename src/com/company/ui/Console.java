@@ -10,6 +10,8 @@ import java.util.List;
 
 public class Console {
 
+    private static final String BREAK_LINE="-";
+
     public static void displayDiscardPile(List<Card> discardPile) {
         String line = "-|-";
         System.out.println(line.repeat(4) + "| Discard Pile |" + line.repeat(4));
@@ -33,6 +35,8 @@ public class Console {
     }
 
     public static void displayTable( Hand hand, Deck deck, List<Card> discardPile) {
+        System.out.println(BREAK_LINE.repeat(6));
+
         System.out.println(hand.getName());
         System.out.print("Deck: |" + deck.deckSize() + "| |");
         showTopOfPile(discardPile);

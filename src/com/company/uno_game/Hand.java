@@ -24,7 +24,14 @@ public class Hand {
         for (Card card : cards) {
             output.append(card.display()).append(" ");
         }
+        return output.toString();
+    }
 
+    public String displayHandFaceDown() {
+        StringBuilder output = new StringBuilder();
+        for (Card card : cards) {
+            output.append(card.faceDown()).append(" ");
+        }
         return output.toString();
     }
     public String getName(){

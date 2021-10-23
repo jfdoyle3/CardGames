@@ -11,6 +11,11 @@ public class PlayingCard extends Card {
         this.suit = suit;
     }
 
+    @Override
+    public String faceDown() {
+        return null;
+    }
+
     public PlayingCard(boolean isFaceDown, int rank, String suit) {
         super(rank,suit);
 

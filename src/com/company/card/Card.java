@@ -2,7 +2,7 @@ package com.company.card;
 
 import com.company.deck.UnoColor;
 
-public abstract class Card {
+public abstract class Card<abtract> {
 
     protected int rank;
     protected String suit;
@@ -24,6 +24,9 @@ public abstract class Card {
     public boolean getIsFaceDown() {
         return isFaceDown;
     }
+
+    public abstract String faceDown();
+
 
     public abstract String display();
 

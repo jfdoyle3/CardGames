@@ -29,9 +29,9 @@ public class UnoCard extends Card {
         StringBuilder cardOutput=new StringBuilder();
 
         switch(rank) {
-            case 10 -> cardOutput.append(suit).append("D2").append(UnoColor.RESET);
-            case 11 -> cardOutput.append(suit).append("Reverse").append(UnoColor.RESET);
-            case 12 -> cardOutput.append(suit).append("Skip").append(UnoColor.RESET);
+            case 10 -> cardOutput.append(suit).append("Dr2").append(UnoColor.RESET);
+            case 11 -> cardOutput.append(suit).append("Rev").append(UnoColor.RESET);
+            case 12 -> cardOutput.append(suit).append("Skp").append(UnoColor.RESET);
             default->
                 cardOutput.append(suit).append(rank).append(UnoColor.RESET);
         }
@@ -52,6 +52,7 @@ public class UnoCard extends Card {
         return  cardOutput.toString();
 
     }
+    public String faceDown(){return "#";}
 
     @Override
     public void flip() {
