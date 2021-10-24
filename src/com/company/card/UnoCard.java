@@ -32,6 +32,8 @@ public class UnoCard extends Card {
             case 10 -> cardOutput.append(suit).append("Dr2").append(UnoColor.RESET);
             case 11 -> cardOutput.append(suit).append("Rev").append(UnoColor.RESET);
             case 12 -> cardOutput.append(suit).append("Skp").append(UnoColor.RESET);
+            case 13 -> cardOutput.append(suit).append("Wld").append(UnoColor.RESET);
+            case 14 -> cardOutput.append(suit).append("W+4").append(UnoColor.RESET);
             default->
                 cardOutput.append(suit).append(rank).append(UnoColor.RESET);
         }

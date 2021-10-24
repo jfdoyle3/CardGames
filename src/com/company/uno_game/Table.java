@@ -2,6 +2,7 @@ package com.company.uno_game;
 
 import com.company.actors.Player;
 import com.company.card.Card;
+import com.company.card.UnoCard;
 import com.company.deck.UnoColor;
 import com.company.ui.Console;
 import com.company.ui.Input;
@@ -15,12 +16,14 @@ public class Table {
 
     private final List<Card> discardPile = new ArrayList<>();
     private Queue<Hand> players = new LinkedList<>();
+    private final static UnoColor[] COLORS = {UnoColor.RED_BOLD_BRIGHT, UnoColor.GREEN_BOLD_BRIGHT, UnoColor.BLUE_BOLD_BRIGHT, UnoColor.YELLOW_BOLD_BRIGHT};
     private int card;
     private Hand hand;
     private final String BREAK_LINE = "-";
+    private boolean actionCardPlayed=false;
 
 
-    public void playGameQueue() {
+    public void playGame() {
         // *********************
         //Add Players
         // int playerCount = Input.getInt("How many players? 2-10", 2, 10, "Error");
@@ -37,20 +40,12 @@ public class Table {
         // *************************
         //   Deal
         deal(playerCount, deck);
-        System.out.println(deck);
         Card firstCard = deck.unoDraw();
-        if(firstCard.getRank()>=10){
-            System.out.println(deck);
-            for(int crd=1; crd<5; crd++){
-               Card card=deck.getCard(crd);
-               if(card.getRank()<10)
-                   firstCard=card;
-
-            }
-        }
+//        if(firstCard.getRank()>=10){
+//            deck.insertCard(firstCard);
 
         discardPile.add(firstCard);
-        System.out.println(deck);
+
 
         /* ========================
            Start of Game Loop
@@ -105,12 +100,12 @@ public class Table {
             // UI: player turn - menu input
             int min = 0;
             int max = hand.getHandSize() - 1;
-            int menu = Input.getInt("1. Play a card\n2. draw a card\n3. Display table - fix / ends turn", 0, 3, "enter a number.");
+            int menu = Input.getInt("1. Play a card\n2. draw a card\n3. Display table - fix / ends turn", 0, 4, "enter a number.");
             switch (menu) {
                 case 0:
                     System.exit(0);
                 case 1: {
-
+                    actionCardPlayed=true;
                     // Play Card
                     card = Input.getInt("If you don't have a card to play\npick any card and a card will be drawn.\npick a card " + min + " thru " + max,
                             min,
@@ -119,7 +114,7 @@ public class Table {
 
                     Card playedCard = hand.getCard(card);
                     Card pile = discardPile.get(discardPile.size() - 1);
-                    if (validateCardColor(playedCard, pile) || validateCardValue(playedCard, pile)) {
+                    if (validateCardColor(playedCard, pile) || validateCardValue(playedCard, pile) || playedCard.getRank()>=13) {
                         discardPile.add(playedCard);
                         hand.removeCard(card);
                         break;
@@ -127,11 +122,16 @@ public class Table {
                     System.out.println("not a playable card - Drawing a card.");
                 }
                 case 2: {
+                    actionCardPlayed=false;
                     hand.addCard(deck.unoDraw());
                     break;
                 }
                 case 3: {
-                    showTable();
+                    Console.showTable(players);
+                    break;
+                }
+                case 4:{
+                    simpleItr();
                     break;
                 }
                 default: {
@@ -141,60 +141,94 @@ public class Table {
             }
 
             players.add(hand);
-
-
+            // player made a choice
+            // end turn
+            int card;
+            // Card played evaluation for Action/Wild card
             // Get Card value for Action Cards played
-            int card = cardPlayed().getRank();
-            System.out.println(">>---> " + card);
+            if(actionCardPlayed)
+                card = cardPlayed().getRank();
+            else
+                card=9;
+
+
 
             //Action cards
             switch (card){
                 case 10 -> {
-                    System.out.println("Draw 2 played");
                     hand=players.poll();
+                    actionCardMessage(hand.getName(), " Drew 2 Cards.");
                     hand.addCard(deck.unoDraw());
                     hand.addCard(deck.unoDraw());
                     players.add(hand);
+
                 }
                 case 11 -> {
-                    System.out.println("Reverse played");
                     players = reverse(players);
                     hand = players.poll();
                     players.add(hand);
+
                 }
                 case 12 -> {
-                    System.out.println("Skip played");
                     hand=players.poll();
+                    actionCardMessage(hand.getName()+"'s", " turn is Skipped");
                     players.add(hand);
+
+                }
+                case 13 ->{
+                    int colorChoice=Input.getInt("Choose Color:\n1. Red\n2. Green\n3. Blue\n4. Yellow",1,4,"error");
+                    Card dupeCard=new UnoCard(13, COLORS[colorChoice-1].toString());
+                    discardPile.set(discardPile.size()-1,dupeCard);
+                }
+                case 14 ->{
+                    int colorChoice=Input.getInt("Choose Color:\n1. Red\n2. Green\n3. Blue\n4. Yellow",1,4,"error");
+                    Card dupeCard=new UnoCard(14, COLORS[colorChoice-1].toString());
+                    discardPile.set(discardPile.size()-1,dupeCard);
+                    hand=players.poll();
+                    actionCardMessage(hand.getName(), " Drew 4 Cards.");
+                    for(card=1; card<=4; card++)
+                     hand.addCard(deck.unoDraw());
+
+                    players.add(hand);
+
                 }
                 default -> {
-                    System.out.println("Action card not used - should skip next player");
+                    System.out.println();
                 }
             }
-            System.out.println("end of while loop");
+
         }
     }
 
-    private void showTable() {
-        //TODO: Displays Players hands/Table need to not end turn
-        System.out.println(BREAK_LINE.repeat(25));
-        // Iterator iterator = players.iterator();
-        // while (iterator.hasNext()) {
-        //     hand = (Hand) iterator.next();
-        for (Hand hand: players) {
-
-            // Player's Names
-            System.out.print(UnoColor.CYAN_BOLD);
-            System.out.print(hand.getName() + ": ");
-            System.out.print(UnoColor.RESET);
-
-            // Player's cards face down
-            System.out.print(UnoColor.BLUE);
-            System.out.print(hand.displayHandFaceDown());
-            System.out.print(UnoColor.RESET);
-            System.out.println("\n"+BREAK_LINE.repeat(25));
-        }
+    private void actionCardMessage(String name, String s) {
+        System.out.print(UnoColor.CYAN_BOLD);
+        System.out.print(name);
+        System.out.print(UnoColor.RESET);
+        System.out.print(UnoColor.RED_BOLD);
+        System.out.print(s);
+        System.out.print(UnoColor.RESET + "\n");
     }
+
+//    private void showTable() {
+//        //TODO: Displays Players hands/Table need to not end turn
+//        System.out.println(BREAK_LINE.repeat(25));
+//        // Iterator iterator = players.iterator();
+//        // while (iterator.hasNext()) {
+//        //     hand = (Hand) iterator.next();
+//        for (Hand hand: players) {
+//
+//            // Player's Names
+//            System.out.print(UnoColor.CYAN_BOLD);
+//            System.out.print(hand.getName() + ": ");
+//            System.out.print(UnoColor.RESET);
+//
+//            // Player's cards face down
+//            System.out.print(UnoColor.BLUE);
+//            System.out.print(hand.displayHandFaceDown());
+//            System.out.print(UnoColor.RESET);
+//            System.out.println("\n"+BREAK_LINE.repeat(25));
+//        }
+//    }
 
     private void simpleItr(){
         for (Hand item: players) {
@@ -222,11 +256,6 @@ public class Table {
         return q;
     }
 
-    private void skipCard() {
-        players.add(hand);
-        players.poll();
-        players.add(hand);
-    }
 
     private Card cardPlayed() {
         Card card = discardPile.get(discardPile.size() - 1);
@@ -235,7 +264,6 @@ public class Table {
 
     private void itrPlayers() {
         Iterator iterator = players.iterator();
-
         while (iterator.hasNext()) {
             hand = (Hand) iterator.next();
             System.out.println(hand.getName() + " " + hand.displayHand());
@@ -251,11 +279,6 @@ public class Table {
         }
     }
 
-
-    private void endGame(Hand hand) {
-        System.out.println(hand.getName() + " Wins");
-        System.exit(0);
-    }
 
 
     private Deck restackDeck() {

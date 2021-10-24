@@ -25,13 +25,18 @@ public class UnoDeck implements Deck {
                 cards.add(new UnoCard(value, color.toString()));
             }
             cards.add(new UnoCard(0, color.toString()));
-            cards.add(new UnoCard(ACTIONS[0],color.toString()));
-            cards.add(new UnoCard(ACTIONS[0],color.toString()));
-            cards.add(new UnoCard(ACTIONS[2],color.toString()));
-            cards.add(new UnoCard(ACTIONS[2],color.toString()));
-            cards.add(new UnoCard(ACTIONS[1],color.toString()));
-            cards.add(new UnoCard(ACTIONS[1],color.toString()));
 
+            cards.add(new UnoCard(ACTIONS[0],color.toString()));
+            cards.add(new UnoCard(ACTIONS[0],color.toString()));
+            cards.add(new UnoCard(ACTIONS[2],color.toString()));
+            cards.add(new UnoCard(ACTIONS[2],color.toString()));
+            cards.add(new UnoCard(ACTIONS[1],color.toString()));
+            cards.add(new UnoCard(ACTIONS[1],color.toString()));
+        }
+        for(int crd=0; crd<4; crd++){
+            for(int value : WILD){
+                cards.add(new UnoCard(value,UnoColor.BLACK_BOLD_BRIGHT.toString()));
+            }
         }
 
     }
