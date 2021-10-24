@@ -37,12 +37,20 @@ public class Table {
         // *************************
         //   Deal
         deal(playerCount, deck);
+        System.out.println(deck);
         Card firstCard = deck.unoDraw();
-//        if(firstCard.getRank()>=10){
-//            deck.insertCard(firstCard);
+        if(firstCard.getRank()>=10){
+            System.out.println(deck);
+            for(int crd=1; crd<5; crd++){
+               Card card=deck.getCard(crd);
+               if(card.getRank()<10)
+                   firstCard=card;
+
+            }
+        }
 
         discardPile.add(firstCard);
-
+        System.out.println(deck);
 
         /* ========================
            Start of Game Loop
@@ -72,14 +80,11 @@ public class Table {
             // Check for empty Deck
             deck = getUnoDeck(deck);
 
-            // Get Card value for Action Cards played
-            int card = cardPlayed().getRank();
-            System.out.println(">>---> " + card);
 
             // Get Player
             hand = players.poll();
 
-            // UI
+            // Console display
             System.out.print("Deck: |" + deck.deckSize() + "| |");
 
             if (discardPile.size() > 0) {
@@ -95,17 +100,23 @@ public class Table {
                 System.out.print(idx + "\t");
 
             System.out.println();
-            // Game turn method - displays table and input/run choice
 
+
+            // UI: player turn - menu input
             int min = 0;
             int max = hand.getHandSize() - 1;
-            int menu = Input.getInt("1. play\n2. draw", 0, 5, "enter a number.");
+            int menu = Input.getInt("1. Play a card\n2. draw a card\n3. Display table - fix / ends turn", 0, 3, "enter a number.");
             switch (menu) {
                 case 0:
                     System.exit(0);
                 case 1: {
+
                     // Play Card
-                    card = Input.getInt("If you don't have a card to play\npick any card and a card will be drawn.\npick a card " + min + " thru " + max, min, max, "enter a number.");
+                    card = Input.getInt("If you don't have a card to play\npick any card and a card will be drawn.\npick a card " + min + " thru " + max,
+                            min,
+                            max,
+                            "enter a number.");
+
                     Card playedCard = hand.getCard(card);
                     Card pile = discardPile.get(discardPile.size() - 1);
                     if (validateCardColor(playedCard, pile) || validateCardValue(playedCard, pile)) {
@@ -120,20 +131,7 @@ public class Table {
                     break;
                 }
                 case 3: {
-                    //this doesn't end turn
-                    System.out.println(BREAK_LINE.repeat(25));
-                    Iterator iterator = players.iterator();
-                    while (iterator.hasNext()) {
-                        hand = (Hand) iterator.next();
-                        System.out.print(UnoColor.CYAN_BOLD);
-                        System.out.print(hand.getName() + ": ");
-                        System.out.print(UnoColor.RESET);
-                        System.out.print(UnoColor.BLUE);
-                        System.out.print(hand.displayHandFaceDown());
-                        System.out.print(UnoColor.RESET);
-                        System.out.println("\n"+BREAK_LINE.repeat(25));
-                    }
-
+                    showTable();
                     break;
                 }
                 default: {
@@ -142,8 +140,65 @@ public class Table {
                 }
             }
 
-
             players.add(hand);
+
+
+            // Get Card value for Action Cards played
+            int card = cardPlayed().getRank();
+            System.out.println(">>---> " + card);
+
+            //Action cards
+            switch (card){
+                case 10 -> {
+                    System.out.println("Draw 2 played");
+                    hand=players.poll();
+                    hand.addCard(deck.unoDraw());
+                    hand.addCard(deck.unoDraw());
+                    players.add(hand);
+                }
+                case 11 -> {
+                    System.out.println("Reverse played");
+                    players = reverse(players);
+                    hand = players.poll();
+                    players.add(hand);
+                }
+                case 12 -> {
+                    System.out.println("Skip played");
+                    hand=players.poll();
+                    players.add(hand);
+                }
+                default -> {
+                    System.out.println("Action card not used - should skip next player");
+                }
+            }
+            System.out.println("end of while loop");
+        }
+    }
+
+    private void showTable() {
+        //TODO: Displays Players hands/Table need to not end turn
+        System.out.println(BREAK_LINE.repeat(25));
+        // Iterator iterator = players.iterator();
+        // while (iterator.hasNext()) {
+        //     hand = (Hand) iterator.next();
+        for (Hand hand: players) {
+
+            // Player's Names
+            System.out.print(UnoColor.CYAN_BOLD);
+            System.out.print(hand.getName() + ": ");
+            System.out.print(UnoColor.RESET);
+
+            // Player's cards face down
+            System.out.print(UnoColor.BLUE);
+            System.out.print(hand.displayHandFaceDown());
+            System.out.print(UnoColor.RESET);
+            System.out.println("\n"+BREAK_LINE.repeat(25));
+        }
+    }
+
+    private void simpleItr(){
+        for (Hand item: players) {
+            System.out.println(item.getName());
         }
     }
 
@@ -155,15 +210,6 @@ public class Table {
         return deck;
     }
 
-    private void showTable() {
-        System.out.println(BREAK_LINE.repeat(25));
-        Iterator iterator = players.iterator();
-        while (iterator.hasNext()) {
-            hand = (Hand) iterator.next();
-            System.out.println(hand.getName() + ":  " + hand.displayHandFaceDown());
-            System.out.println(BREAK_LINE.repeat(25));
-        }
-    }
 
     private Queue reverse(Queue<Hand> q) {
         Stack<Hand> s = new Stack<>();

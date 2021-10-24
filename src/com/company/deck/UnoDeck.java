@@ -67,7 +67,7 @@ public class UnoDeck implements Deck {
         return getCard(index).getSuit();
     }
 
-    public void insertCard(Card card){ cards.add(card);}
+//    public void insertCard(Card card){ cards.add(card);}
 
     @Override
     public String toString() {
