@@ -13,7 +13,7 @@ public class UnoDeck implements Deck {
     private final static UnoColor[] COLORS = {UnoColor.RED_BOLD_BRIGHT, UnoColor.GREEN_BOLD_BRIGHT, UnoColor.BLUE_BOLD_BRIGHT, UnoColor.YELLOW_BOLD_BRIGHT};
     private final static int[] VALUES = {1, 2, 3, 4, 5, 6, 7, 8, 9}; // 4 colors of each 2 per color,   Zero Card: 4 colors 1 per color = 76 cards
     private final static int[] ACTIONS = {10, 11, 12}; // 10 = Draw 2, 11 = Reverse, 12 = Skip - 4 of each 2 per color = 24 cards
-    private final static int WILD = 13; // 4 Wild Cards  / ( 4  4+ Wild ) not used- extra challenge = 8 cards
+    private final static int[] WILD = {13,14}; // 4 Wild Cards  / ( 4  4+ Wild ) not used- extra challenge = 8 cards
     private List<Card> cards;
     private Random rand = new Random();
 
@@ -25,12 +25,20 @@ public class UnoDeck implements Deck {
                 cards.add(new UnoCard(value, color.toString()));
             }
             cards.add(new UnoCard(0, color.toString()));
-            cards.add(new UnoCard(ACTIONS[0],color.toString()));
-            cards.add(new UnoCard(ACTIONS[0],color.toString()));
-            cards.add(new UnoCard(ACTIONS[2],color.toString()));
-            cards.add(new UnoCard(ACTIONS[2],color.toString()));
 
+            cards.add(new UnoCard(ACTIONS[0],color.toString()));
+            cards.add(new UnoCard(ACTIONS[0],color.toString()));
+            cards.add(new UnoCard(ACTIONS[2],color.toString()));
+            cards.add(new UnoCard(ACTIONS[2],color.toString()));
+            cards.add(new UnoCard(ACTIONS[1],color.toString()));
+            cards.add(new UnoCard(ACTIONS[1],color.toString()));
         }
+        for(int crd=0; crd<4; crd++){
+            for(int value : WILD){
+                cards.add(new UnoCard(value,UnoColor.BLACK_BOLD_BRIGHT.toString()));
+            }
+        }
+
     }
 
     public UnoDeck(int deckSize) {
@@ -63,6 +71,8 @@ public class UnoDeck implements Deck {
     public String getColor(int index) {
         return getCard(index).getSuit();
     }
+
+//    public void insertCard(Card card){ cards.add(card);}
 
     @Override
     public String toString() {

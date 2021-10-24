@@ -13,6 +13,9 @@ public enum UnoColor {
     CLUBS("\033[1;90m"+"♧"+"\033[0m"),
     DIAMONDS ("\033[1;91m"+"♦"+"\033[0m"),
 
+
+
+
     //Color end string, color reset
     RESET("\033[0m"),
 
@@ -86,6 +89,7 @@ public enum UnoColor {
     CYAN_BACKGROUND_BRIGHT("\033[0;106m"),      // CYAN
     WHITE_BACKGROUND_BRIGHT("\033[0;107m");     // WHITE
 
+    private static Actor hand;
     private final String code;
 
     UnoColor(String code) {
