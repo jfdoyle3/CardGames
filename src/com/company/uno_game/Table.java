@@ -20,7 +20,7 @@ public class Table {
     private int card;
     private Hand hand;
     private final String BREAK_LINE = "-";
-    private boolean actionCardPlayed=false;
+    private boolean isActionCard = false;
 
 
     public void playGame() {
@@ -47,29 +47,6 @@ public class Table {
         discardPile.add(firstCard);
 
 
-        /* ========================
-           Start of Game Loop
-         *  Check for empty deck - re-stack if is.
-         *    hand=poll()   -  get player hand
-         *    player chooses to play / draw - refactor
-               input:menu
-               play / draw ends turn
-               play: plays card
-               draw: add card to hand
-         *    hand.add(Queue)
-          *     end turn
-          Game has to check for these cards at end of turn:
-             Check discard Pile after turn.
-                draw 2:   poll(), add cards , add() / itr: next(), add cards, add()
-                skip:     poll, add() / itr: next(), add()
-                reverse : call reverse method to reverse Queue
-
-                wild:     during play, color menu
-                wild +4:  poll(), add cards, add() / itr: next(), add cards, add()
-
-             ==========================================
-
-        */
         while (true) {
 
             // Check for empty Deck
@@ -80,158 +57,136 @@ public class Table {
             hand = players.poll();
 
             // Console display
-            System.out.print("Deck: |" + deck.deckSize() + "| |");
-
-            if (discardPile.size() > 0) {
-                System.out.println(discardPile.get(discardPile.size() - 1).display() + "| :Discard Pile");
-            } else {
-                System.out.println("empty| :Discard Pile");
-            }
-            System.out.print(UnoColor.CYAN_BOLD);
-            System.out.print(hand.getName());
-            System.out.print(UnoColor.RESET+"\n");
-            System.out.println(hand.displayHand());
-            for (int idx = 0; idx < hand.getHandSize(); idx++)
-                System.out.print(idx + "\t");
-
-            System.out.println();
+            Console.displayPlayer(deck,discardPile,hand);
 
 
             // UI: player turn - menu input
-            int min = 0;
-            int max = hand.getHandSize() - 1;
-            int menu = Input.getInt("1. Play a card\n2. draw a card\n3. Display table - fix / ends turn", 0, 4, "enter a number.");
-            switch (menu) {
-                case 0:
-                    System.exit(0);
-                case 1: {
-                    actionCardPlayed=true;
-                    // Play Card
-                    card = Input.getInt("If you don't have a card to play\npick any card and a card will be drawn.\npick a card " + min + " thru " + max,
-                            min,
-                            max,
-                            "enter a number.");
+            playerChoice(deck);
 
-                    Card playedCard = hand.getCard(card);
-                    Card pile = discardPile.get(discardPile.size() - 1);
-                    if (validateCardColor(playedCard, pile) || validateCardValue(playedCard, pile) || playedCard.getRank()>=13) {
-                        discardPile.add(playedCard);
-                        hand.removeCard(card);
-                        break;
-                    }
-                    System.out.println("not a playable card - Drawing a card.");
-                }
-                case 2: {
-                    actionCardPlayed=false;
-                    hand.addCard(deck.unoDraw());
-                    break;
-                }
-                case 3: {
-                    Console.showTable(players);
-                    break;
-                }
-                case 4:{
-                    simpleItr();
-                    break;
-                }
-                default: {
-                    System.out.println("Error!!");
-                    break;
-                }
+            if (hand.getHandSize()==1){
+                Console.actionCardMessage(hand.getName()," UNO!!");
             }
-
+            if(hand.getHandSize()==0){
+                Console.actionCardMessage(hand.getName()," WINS!!!");
+                System.exit(0);
+            }
             players.add(hand);
             // player made a choice
             // end turn
             int card;
             // Card played evaluation for Action/Wild card
             // Get Card value for Action Cards played
-            if(actionCardPlayed)
+            if (isActionCard)
                 card = cardPlayed().getRank();
             else
-                card=9;
-
-
+                card = 9;
 
             //Action cards
-            switch (card){
-                case 10 -> {
-                    hand=players.poll();
-                    actionCardMessage(hand.getName(), " Drew 2 Cards.");
-                    hand.addCard(deck.unoDraw());
-                    hand.addCard(deck.unoDraw());
-                    players.add(hand);
-
-                }
-                case 11 -> {
-                    players = reverse(players);
-                    hand = players.poll();
-                    players.add(hand);
-
-                }
-                case 12 -> {
-                    hand=players.poll();
-                    actionCardMessage(hand.getName()+"'s", " turn is Skipped");
-                    players.add(hand);
-
-                }
-                case 13 ->{
-                    int colorChoice=Input.getInt("Choose Color:\n1. Red\n2. Green\n3. Blue\n4. Yellow",1,4,"error");
-                    Card dupeCard=new UnoCard(13, COLORS[colorChoice-1].toString());
-                    discardPile.set(discardPile.size()-1,dupeCard);
-                }
-                case 14 ->{
-                    int colorChoice=Input.getInt("Choose Color:\n1. Red\n2. Green\n3. Blue\n4. Yellow",1,4,"error");
-                    Card dupeCard=new UnoCard(14, COLORS[colorChoice-1].toString());
-                    discardPile.set(discardPile.size()-1,dupeCard);
-                    hand=players.poll();
-                    actionCardMessage(hand.getName(), " Drew 4 Cards.");
-                    for(card=1; card<=4; card++)
-                     hand.addCard(deck.unoDraw());
-
-                    players.add(hand);
-
-                }
-                default -> {
-                    System.out.println();
-                }
+            switch (card) {
+                case 10 -> draw2Card(deck);
+                case 11 -> reverseCard();
+                case 12 -> skippedCard();
+                case 13 -> wildCard();
+                case 14 -> wild4Card(deck);
+                default -> System.out.println("error");
             }
 
         }
     }
 
-    private void actionCardMessage(String name, String s) {
-        System.out.print(UnoColor.CYAN_BOLD);
-        System.out.print(name);
-        System.out.print(UnoColor.RESET);
-        System.out.print(UnoColor.RED_BOLD);
-        System.out.print(s);
-        System.out.print(UnoColor.RESET + "\n");
+
+
+    private void playerChoice(UnoDeck deck) {
+        int min = 0;
+        int max = hand.getHandSize() - 1;
+        int menu = Input.getInt("1. Play a card\n2. draw a card\n3. Display table", 0, 4, "enter a number.");
+        switch (menu) {
+            case 0:
+                System.exit(0);
+            case 1: {
+                isActionCard= true;
+                // Play Card
+                card = Input.getInt("If you don't have a card to play\npick any card and a card will be drawn.\npick a card " + min + " thru " + max,
+                        min,
+                        max,
+                        "enter a number.");
+
+                Card playedCard = hand.getCard(card);
+                Card pile = discardPile.get(discardPile.size() - 1);
+                if (validateCardColor(playedCard, pile) || validateCardValue(playedCard, pile) || playedCard.getRank() >= 13) {
+                    discardPile.add(playedCard);
+                    hand.removeCard(card);
+                    break;
+                }
+                System.out.println("not a playable card - Drawing a card.");
+            }
+            case 2: {
+                playerDrawCard(deck);
+                break;
+            }
+            case 3: {
+                Console.showTable(players);
+                Console.displayPlayer(deck,discardPile,hand);
+                playerChoice(deck);
+                break;
+            }
+            case 4: {
+                simpleItr();
+                break;
+            }
+            default: {
+                System.out.println("Error!!");
+                break;
+            }
+        }
     }
 
-//    private void showTable() {
-//        //TODO: Displays Players hands/Table need to not end turn
-//        System.out.println(BREAK_LINE.repeat(25));
-//        // Iterator iterator = players.iterator();
-//        // while (iterator.hasNext()) {
-//        //     hand = (Hand) iterator.next();
-//        for (Hand hand: players) {
-//
-//            // Player's Names
-//            System.out.print(UnoColor.CYAN_BOLD);
-//            System.out.print(hand.getName() + ": ");
-//            System.out.print(UnoColor.RESET);
-//
-//            // Player's cards face down
-//            System.out.print(UnoColor.BLUE);
-//            System.out.print(hand.displayHandFaceDown());
-//            System.out.print(UnoColor.RESET);
-//            System.out.println("\n"+BREAK_LINE.repeat(25));
-//        }
-//    }
+    private void playerDrawCard(UnoDeck deck) {
+        isActionCard = false;
+        hand.addCard(deck.unoDraw());
+    }
 
-    private void simpleItr(){
-        for (Hand item: players) {
+    private void draw2Card(UnoDeck deck) {
+        hand = players.poll();
+        Console.actionCardMessage(hand.getName(), " Drew 2 Cards.");
+        hand.addCard(deck.unoDraw());
+        hand.addCard(deck.unoDraw());
+        players.add(hand);
+    }
+
+    private void wild4Card(UnoDeck deck) {
+        int card;
+        int colorChoice = Input.getInt("Choose Color:\n1. Red\n2. Green\n3. Blue\n4. Yellow", 1, 4, "error");
+        Card dupeCard = new UnoCard(14, COLORS[colorChoice - 1].toString());
+        discardPile.set(discardPile.size() - 1, dupeCard);
+        hand = players.poll();
+        Console.actionCardMessage(hand.getName(), " Drew 4 Cards.");
+        for (card = 1; card <= 4; card++)
+            hand.addCard(deck.unoDraw());
+        players.add(hand);
+    }
+
+    private void wildCard() {
+        int colorChoice = Input.getInt("Choose Color:\n1. Red\n2. Green\n3. Blue\n4. Yellow", 1, 4, "error");
+        Card dupeCard = new UnoCard(13, COLORS[colorChoice - 1].toString());
+        discardPile.set(discardPile.size() - 1, dupeCard);
+    }
+
+    private void skippedCard() {
+        hand = players.poll();
+        Console.actionCardMessage(hand.getName() + "'s", " turn is Skipped");
+        players.add(hand);
+    }
+
+    private void reverseCard() {
+        players = reverse(players);
+        hand = players.poll();
+        Console.actionCardMessage(">>-->"," Reverse");
+        players.add(hand);
+    }
+
+    private void simpleItr() {
+        for (Hand item : players) {
             System.out.println(item.getName());
         }
     }
@@ -278,7 +233,6 @@ public class Table {
             players.add(hand);
         }
     }
-
 
 
     private Deck restackDeck() {
