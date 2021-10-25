@@ -63,6 +63,13 @@ public class Table {
             // UI: player turn - menu input
             playerChoice(deck);
 
+            if (hand.getHandSize()==1){
+                Console.actionCardMessage(hand.getName()," UNO!!");
+            }
+            if(hand.getHandSize()==0){
+                Console.actionCardMessage(hand.getName()," WINS!!!");
+                System.exit(0);
+            }
             players.add(hand);
             // player made a choice
             // end turn
