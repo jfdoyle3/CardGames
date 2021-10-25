@@ -27,7 +27,7 @@ public class Table {
         // *********************
         //Add Players
         // int playerCount = Input.getInt("How many players? 2-10", 2, 10, "Error");
-        int playerCount = 4;
+        int playerCount = 21;
         for (int idx = 1; idx <= playerCount; idx++) {
             players.add(new Hand(new Player("Player " + idx)));
 
@@ -41,9 +41,11 @@ public class Table {
         //   Deal
         deal(playerCount, deck);
         Card firstCard = deck.unoDraw();
-//        if(firstCard.getRank()>=10){
-//            deck.insertCard(firstCard);
-
+        int firstCardValue=firstCard.getRank();
+        while(firstCardValue >=10){
+               deck.shuffle();
+            firstCard = deck.unoDraw();
+           }
         discardPile.add(firstCard);
 
 
@@ -100,7 +102,7 @@ public class Table {
             // UI: player turn - menu input
             int min = 0;
             int max = hand.getHandSize() - 1;
-            int menu = Input.getInt("1. Play a card\n2. draw a card\n3. Display table - fix / ends turn", 0, 4, "enter a number.");
+            int menu = Input.getInt("1. Play a card\n2. draw a card\n3. Display table", 0, 4, "enter a number.");
             switch (menu) {
                 case 0:
                     System.exit(0);
@@ -139,6 +141,13 @@ public class Table {
                     break;
                 }
             }
+            if (hand.getHandSize()==1){
+                actionCardMessage(hand.getName()," UNO!!");
+            }
+            if(hand.getHandSize()==0){
+                actionCardMessage(hand.getName()," WINS!!!");
+                System.exit(0);
+            }
 
             players.add(hand);
             // player made a choice
@@ -166,6 +175,7 @@ public class Table {
                 case 11 -> {
                     players = reverse(players);
                     hand = players.poll();
+                    actionCardMessage(">>--->"," Reverse");
                     players.add(hand);
 
                 }
