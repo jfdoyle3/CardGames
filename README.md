@@ -1,4 +1,7 @@
 # Card Games
 Card games in Java
 
-creating a game of Uno
+Created the game Mau-Mau / Uno 
+
+
+Applied: OOP, inheritance, interfaces, Queues
