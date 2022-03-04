@@ -19,7 +19,6 @@ public class Table {
     private final static UnoColor[] COLORS = {UnoColor.RED_BOLD_BRIGHT, UnoColor.GREEN_BOLD_BRIGHT, UnoColor.BLUE_BOLD_BRIGHT, UnoColor.YELLOW_BOLD_BRIGHT};
     private int card;
     private Hand hand;
-    private final String BREAK_LINE = "-";
     private boolean isActionCard = false;
 
 
@@ -57,17 +56,17 @@ public class Table {
             hand = players.poll();
 
             // Console display
-            Console.displayPlayer(deck,discardPile,hand);
+            Console.displayPlayer(deck, discardPile, hand);
 
 
             // UI: player turn - menu input
             playerChoice(deck);
 
-            if (hand.getHandSize()==1){
-                Console.actionCardMessage(hand.getName()," UNO!!");
+            if (hand.getHandSize() == 1) {
+                Console.actionCardMessage(hand.getName(), " UNO!!");
             }
-            if(hand.getHandSize()==0){
-                Console.actionCardMessage(hand.getName()," WINS!!!");
+            if (hand.getHandSize() == 0) {
+                Console.actionCardMessage(hand.getName(), " WINS!!!");
                 System.exit(0);
             }
             players.add(hand);
@@ -90,21 +89,17 @@ public class Table {
                 case 14 -> wild4Card(deck);
                 default -> System.out.println("error");
             }
-
         }
     }
-
-
 
     private void playerChoice(UnoDeck deck) {
         int min = 0;
         int max = hand.getHandSize() - 1;
-        int menu = Input.getInt("1. Play a card\n2. draw a card\n3. Display table", 0, 4, "enter a number.");
+        int menu = Input.getInt("1. Play a card\n2. draw a card\n3. Display table", 1, 3, "enter a number.");
         switch (menu) {
-            case 0:
-                System.exit(0);
+
             case 1: {
-                isActionCard= true;
+                isActionCard = true;
                 // Play Card
                 card = Input.getInt("If you don't have a card to play\npick any card and a card will be drawn.\npick a card " + min + " thru " + max,
                         min,
@@ -121,17 +116,14 @@ public class Table {
                 System.out.println("not a playable card - Drawing a card.");
             }
             case 2: {
-                playerDrawCard(deck);
+                isActionCard = false;
+                hand.addCard(deck.unoDraw());
                 break;
             }
             case 3: {
                 Console.showTable(players);
-                Console.displayPlayer(deck,discardPile,hand);
+                Console.displayPlayer(deck, discardPile, hand);
                 playerChoice(deck);
-                break;
-            }
-            case 4: {
-                simpleItr();
                 break;
             }
             default: {
@@ -141,10 +133,6 @@ public class Table {
         }
     }
 
-    private void playerDrawCard(UnoDeck deck) {
-        isActionCard = false;
-        hand.addCard(deck.unoDraw());
-    }
 
     private void draw2Card(UnoDeck deck) {
         hand = players.poll();
@@ -181,15 +169,10 @@ public class Table {
     private void reverseCard() {
         players = reverse(players);
         hand = players.poll();
-        Console.actionCardMessage(">>-->"," Reverse");
+        Console.actionCardMessage(">>-->", " Reverse");
         players.add(hand);
     }
 
-    private void simpleItr() {
-        for (Hand item : players) {
-            System.out.println(item.getName());
-        }
-    }
 
     private UnoDeck getUnoDeck(UnoDeck deck) {
         if (deck.isDeckEmpty()) {
