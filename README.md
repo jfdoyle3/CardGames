@@ -11,3 +11,5 @@ Play the game of Uno
 
 
 created jar file
+To run:
+java -jar CardGames.jar
